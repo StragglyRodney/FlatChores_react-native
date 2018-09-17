@@ -14,6 +14,9 @@ import {
   createBottomTabNavigator
 } from 'react-navigation'
 
+mjj
+import Icon from '@expo/vector-icons/FontAwesome';
+import {AddButton} from "./src/Components/AddButton";
 import HomeScreen from './src/screens/app/HomeScreen'
 import FlatScreen from './src/screens/app/FlatScreen'
 import SettingsScreen from './src/screens/app/SettingsScreen'
@@ -25,9 +28,51 @@ import ProfileScreen from './src/screens/app/ProfileScreen'
 
 /* Define the different navigation stacks */
 const AppTab = createBottomTabNavigator({
-  Home: HomeScreen,
-  Flat: FlatScreen,
-  Settings: SettingsScreen
+  Home: {
+    screen: HomeScreen,
+    navigationOptions: () => ({
+        tabBarIcon: ({tintColor}) => (
+            <Icon
+                name="Home"
+                color={tintColor}
+                size={24}
+            />
+        )
+    })
+},
+Flat: {
+    screen: FlatScreen,
+    navigationOptions: () => ({
+        tabBarIcon: ({tintColor}) => (
+            <Icon
+                name="Flat"
+                color={tintColor}
+                size={24}
+            />
+        )
+    })
+},
+Settings: {
+    screen: SettingsScreen,
+    navigationOptions: () => ({
+        tabBarIcon: ({tintColor}) => (
+            <Icon
+                name="Settings"
+                color={tintColor}
+                size={24}
+            />
+        )
+    })
+},
+tabBarOptions: {
+    showLabel: false,
+    activeTintColor: '#F8F8F8',
+    inactiveTintColor: '#586589',
+    style: {
+        backgroundColor: '#171F33'
+    },
+    tabStyle: {}
+}
 })
 
 const HomeStack = createStackNavigator({

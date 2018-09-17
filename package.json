@@ -9,9 +9,13 @@
   "dependencies": {
     "react": "16.5.0",
     "react-native": "0.57.0",
-    "react-navigation": "git+https://github.com/react-community/react-navigation.git"
+    "react-native-elements": "^0.19.1",
+    "react-native-vector-icons": "^5.0.0",
+    "react-navigation": "git+https://github.com/react-community/react-navigation.git",
+    "react-navigation-material-bottom-tabs": "^0.4.0"
   },
   "devDependencies": {
+    "@expo/vector-icons": "^6.3.1",
     "babel-jest": "23.6.0",
     "jest": "23.6.0",
     "metro-react-native-babel-preset": "0.45.3",

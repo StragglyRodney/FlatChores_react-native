@@ -6,7 +6,7 @@ export default class Logo extends React.Component {
         return (
             <View style = {styles.container}>
                 <Image style={{width: 120, height: 120}}
-                    source={require('../Logo/logo.png')}/>
+                    source={{uri: '../images/logo.png'}}/>
                 <Text style = {styles.logoText}>Welcome to flatchores.</Text>
             </View>
         )

@@ -1,21 +1,19 @@
 // import liraries
 import React, { Component } from 'react'
 import { View, Text, StyleSheet, Button, TouchableOpacity } from 'react-native'
-import LoginForm from './AuthComponents/LoginForm'
-import Logo from './AuthComponents/Logo'
+import SignupForm from './AuthComponents/SignupForm'
 // create a component
-class LoginScreen extends Component {
+class SignupScreen extends Component {
   render () {
     return (
       <View style={styles.container}>
-      <Logo/>
-        <LoginForm type = "Login"/>
-          <View style = {styles.signupTextCont}>
-            <Text style = {styles.signupText}>Don't have an account yet?</Text>
-                      <TouchableOpacity onPress={() => this.props.navigation.navigate('Signup')}>
-                          <Text style = {styles.signupButton}> Sign up!</Text>
-                      </TouchableOpacity>
-          </View>
+       <SignupForm type = "Signup"/>
+        <View style = {styles.signupTextCont}>
+          <Text style = {styles.signupText}>Already Have an account?</Text>
+                    <TouchableOpacity onPress={() => this.props.navigation.navigate('Login')}>
+                        <Text style = {styles.signupButton}> Log in!</Text>
+                    </TouchableOpacity>
+        </View>
       </View>
     )
   }
@@ -48,4 +46,4 @@ const styles = StyleSheet.create({
 })
 
 // make this component available to the app
-export default LoginScreen
+export default SignupScreen

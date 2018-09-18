@@ -19,6 +19,7 @@ import FlatScreen from './src/screens/app/FlatScreen'
 import SettingsScreen from './src/screens/app/SettingsScreen'
 import GetStartedScreen from './src/screens/auth/GetStartedScreen'
 import LoginScreen from './src/screens/auth/LoginScreen'
+import SignupScreen from './src/screens/auth/SignupScreen'
 import CreateChoreScreen from './src/screens/app/CreateChoreScreen'
 import NotificationsScreen from './src/screens/app/NotificationsScreen'
 import ProfileScreen from './src/screens/app/ProfileScreen'
@@ -36,7 +37,8 @@ const HomeStack = createStackNavigator({
 
 const AuthStack = createStackNavigator({
   GetStarted: GetStartedScreen,
-  Login: LoginScreen
+  Login: LoginScreen,
+  Signup: SignupScreen,
 })
 
 export default createSwitchNavigator(

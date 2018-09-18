@@ -22,7 +22,7 @@ class SignupScreen extends Component {
 // define your styles
 const styles = StyleSheet.create({
   container : {
-    backgroundColor: '#455a64',
+    backgroundColor: '#00c2cc',
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center'

@@ -1,10 +1,13 @@
 // import liraries
 import React, { Component } from 'react'
-import { View, Text, StyleSheet, Button, TouchableOpacity } from 'react-native'
+import { View, Text, StyleSheet, Button, TouchableOpacity, navigationOptions } from 'react-native'
 import LoginForm from './AuthComponents/LoginForm'
 import Logo from './AuthComponents/Logo'
 // create a component
 class LoginScreen extends Component {
+  static navigationOptions = {
+    header: { visible: false } // !!! Hide Header
+  }
   render () {
     return (
       <View style={styles.container}>

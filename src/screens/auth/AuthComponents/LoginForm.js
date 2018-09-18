@@ -2,8 +2,10 @@ import React, {Component} from 'react';
 import { StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native';
 
 export default class LoginForm extends React.Component {
-
-
+    static navigationOptions = {
+        header: { visible:false },
+        title: 'Welcome',
+        };
     render() {
         return (
             <View style = {styles.container}>

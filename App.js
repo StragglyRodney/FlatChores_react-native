@@ -36,10 +36,14 @@ const HomeStack = createStackNavigator({
 })
 
 const AuthStack = createStackNavigator({
-  GetStarted: GetStartedScreen,
-  Login: LoginScreen,
-  Signup: SignupScreen,
-})
+  GetStarted: {screen: GetStartedScreen},
+  Login: {screen: LoginScreen},
+  Signup: {screen: SignupScreen}},
+  { 
+    headerMode: 'screen' 
+  }
+  
+)
 
 export default createSwitchNavigator(
   {

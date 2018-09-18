@@ -4,6 +4,7 @@ import { View, Text, StyleSheet, Button } from 'react-native'
 
 // create a component
 class GetStartedScreen extends Component {
+ 
   render () {
     return (
       <View style={styles.container}>

@@ -3,8 +3,16 @@ import React, { Component } from 'react'
 import { View, Text, StyleSheet, Button } from 'react-native'
 import { createStackNavigator } from 'react-navigation'
 
+import Icon from 'react-native-vector-icons/MaterialIcons'
+
 // create a component
 class SettingsScreen extends Component {
+  static navigationOptions = {
+    tabBarIcon: <Icon name='account-circle' size={25} />,
+    tabBarLabel: 'Settings',
+    tabBarColor: '#313a1c',
+    shifting: true
+  }
   render () {
     return (
       <View style={styles.container}>

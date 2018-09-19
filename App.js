@@ -13,6 +13,11 @@ import {
   createSwitchNavigator,
   createBottomTabNavigator
 } from 'react-navigation'
+import {
+  createMaterialBottomTabNavigator
+} from 'react-navigation-material-bottom-tabs'
+
+import Icon from 'react-native-vector-icons/MaterialIcons'
 
 import HomeScreen from './src/screens/app/HomeScreen'
 import FlatScreen from './src/screens/app/FlatScreen'
@@ -25,11 +30,17 @@ import NotificationsScreen from './src/screens/app/NotificationsScreen'
 import ProfileScreen from './src/screens/app/ProfileScreen'
 
 /* Define the different navigation stacks */
-const AppTab = createBottomTabNavigator({
-  Home: HomeScreen,
-  Flat: FlatScreen,
-  Settings: SettingsScreen
-})
+const AppTab = createMaterialBottomTabNavigator(
+  {
+    Home: HomeScreen,
+    Flat: FlatScreen,
+    Settings: SettingsScreen
+  },
+  {
+    initialRouteName: 'Home',
+    barStyle: { backgroundColor: '#1c313a' }
+  }
+)
 
 const HomeStack = createStackNavigator({
   CreateChore: CreateChoreScreen
@@ -38,7 +49,7 @@ const HomeStack = createStackNavigator({
 const AuthStack = createStackNavigator({
   GetStarted: GetStartedScreen,
   Login: LoginScreen,
-  Signup: SignupScreen,
+  Signup: SignupScreen
 })
 
 export default createSwitchNavigator(

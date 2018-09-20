@@ -2,8 +2,16 @@
 import React, { Component } from 'react'
 import { View, Text, StyleSheet } from 'react-native'
 
+import Icon from 'react-native-vector-icons/MaterialIcons'
+
 // create a component
 class FlatScreen extends Component {
+  static navigationOptions = {
+    tabBarIcon: <Icon name='weekend' size={25} />,
+    tabBarLabel: 'Flat',
+    tabBarColor: '#3a1c31',
+    shifting: true
+  }
   render () {
     return (
       <View style={styles.container}>

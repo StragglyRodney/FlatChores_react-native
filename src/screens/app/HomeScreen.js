@@ -7,12 +7,6 @@ import Icon from 'react-native-vector-icons/MaterialIcons'
 
 // create a component
 class HomeScreen extends Component {
-  static navigationOptions = {
-    tabBarIcon: <Icon name='people' size={25} />,
-    tabBarLabel: 'Home',
-    tabBarColor: '#1c313a',
-    shifting: true
-  }
   render () {
     return (
       <View style={styles.container}>

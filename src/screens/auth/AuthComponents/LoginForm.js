@@ -25,7 +25,7 @@ class LoginForm extends React.Component {
         />
         <TouchableOpacity
           style={styles.button}
-          onPress={() => this.props.navigation.navigate('Home')}
+          onPress={() => this.props.navigation.navigate('App')}
         >
           <Text style={styles.buttonText}>{this.props.type}</Text>
         </TouchableOpacity>

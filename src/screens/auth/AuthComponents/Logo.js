@@ -5,7 +5,8 @@ export default class Logo extends React.Component {
   render () {
     return (
       <View style={styles.container}>
-
+        <Image style={{width: 120, height: 120}}
+          source={{uri: '/Users/danielwalker/Desktop/2018 T2/SWEN325/A2/FlatChores_react-native/src/screens/auth/Images/logo.png'}}/>   
         <Text style={styles.logoText}>Welcome to flatchores.</Text>
       </View>
     )

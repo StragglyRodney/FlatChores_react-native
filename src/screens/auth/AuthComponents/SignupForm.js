@@ -54,7 +54,7 @@ export default class SignupForm extends React.Component {
 
         button: {
             width: 300,
-            backgroundColor: '#1c313a',
+            backgroundColor: '#ffa18a',
             borderRadius: 10,
             paddingVertical: 12,
             marginVertical: 6,

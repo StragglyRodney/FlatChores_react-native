@@ -5,9 +5,7 @@ import LoginForm from './AuthComponents/LoginForm'
 import Logo from './AuthComponents/Logo'
 // create a component
 class LoginScreen extends Component {
-  static navigationOptions = {
-    header: { visible: false } // !!! Hide Header
-  }
+  
   render () {
     return (
       <View style={styles.container}>

@@ -27,6 +27,7 @@ import SignupScreen from './src/screens/auth/SignupScreen'
 import CreateChoreScreen from './src/screens/app/CreateChoreScreen'
 import NotificationsScreen from './src/screens/app/NotificationsScreen'
 import ProfileScreen from './src/screens/app/ProfileScreen'
+import LeaderBoardScreen from './src/screens/app/LeaderBoardScreen'
 
 /* Define the startup (authentication) stack */
 const AuthStack = createStackNavigator({
@@ -49,6 +50,10 @@ const SettingsStack = createStackNavigator({
   SettingsNav: SettingsScreen,
   Notifications: NotificationsScreen,
   Profile: ProfileScreen
+})
+
+const LeaderBoardStack = createStackNavigator({
+  LeaderBoard: LeaderBoardScreen
 })
 
 /* Hides the tabBar if not on the main tab screen.
@@ -80,6 +85,15 @@ const AppTab = createMaterialBottomTabNavigator(
         tabBarIcon: <Icon name='weekend' size={25} />,
         tabBarLabel: 'Flat',
         tabBarColor: '#3a1c31',
+        shifting: true
+      }
+    },
+    LeaderBoard: {
+      screen: LeaderBoardStack,
+      navigationOptions: {
+        tabBarIcon: <Icon name='reorder' size={25} />,
+        tabBarLabel: 'LeaderBoard',
+        tabBarColor: '#ff0000',
         shifting: true
       }
     },

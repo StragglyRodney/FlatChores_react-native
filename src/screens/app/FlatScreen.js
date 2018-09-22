@@ -7,10 +7,7 @@ import Icon from 'react-native-vector-icons/MaterialIcons'
 // create a component
 class FlatScreen extends Component {
   static navigationOptions = {
-    tabBarIcon: <Icon name='weekend' size={25} />,
-    tabBarLabel: 'Flat',
-    tabBarColor: '#3a1c31',
-    shifting: true
+    title: 'Flat'
   }
   render () {
     return (

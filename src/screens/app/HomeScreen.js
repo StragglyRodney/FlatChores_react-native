@@ -7,7 +7,9 @@ import Icon from 'react-native-vector-icons/MaterialIcons'
 
 // create a component
 class HomeScreen extends Component {
+
   render() {
+
     return (
       <View style={styles.container}>
         <View style={styles.addChoreCont}>

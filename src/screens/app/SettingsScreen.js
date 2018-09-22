@@ -1,27 +1,129 @@
 // import liraries
 import React, { Component } from 'react'
-import { View, Text, StyleSheet, Button } from 'react-native'
+import {
+  View,
+  Text,
+  StyleSheet,
+  Button,
+  Platform,
+  ScrollView
+} from 'react-native'
 import { createStackNavigator } from 'react-navigation'
-
 import Icon from 'react-native-vector-icons/MaterialIcons'
+import {
+  SettingsDividerShort,
+  SettingsDividerLong,
+  SettingsEditText,
+  SettingsCategoryHeader,
+  SettingsSwitch,
+  SettingsPicker
+} from 'react-native-settings-components'
 
 // create a component
 class SettingsScreen extends Component {
+  static navigationOptions = {
+    title: 'Settings'
+  }
+  constructor () {
+    super()
+    this.state = {
+      username: '',
+      allowPushNotifications: false,
+      gender: ''
+    }
+  }
+
   render () {
     return (
-      <View style={styles.container}>
-        <Text>SettingsScreen</Text>
-        <Button
-          title='NotificationScreen'
-          onPress={() => this.props.navigation.navigate('Notifications')}
+      <ScrollView
+        style={{
+          flex: 1,
+          backgroundColor: Platform.OS === 'ios'
+            ? colors.iosSettingsBackground
+            : colors.white
+        }}
+      >
+        <SettingsCategoryHeader
+          title={'My Account'}
+          textStyle={Platform.OS === 'android' ? { color: colors.monza } : null}
         />
-        <Button
-          title='ProfileScreen'
-          onPress={() => this.props.navigation.navigate('Profile')}
+
+        <SettingsDividerLong android={false} />
+
+        <SettingsEditText
+          title='Username'
+          dialogDescription={'Enter your username.'}
+          valuePlaceholder={this.state.username}
+          negativeButtonTitle={'Cancel'}
+          positiveButtonTitle={'Save'}
+          onSaveValue={value => {
+            this.setState({
+              username: value
+            })
+          }}
+          value={this.state.username}
+          dialogAndroidProps={{
+            widgetColor: colors.monza,
+            positiveColor: colors.monza,
+            negativeColor: colors.monza
+          }}
         />
-      </View>
+        <SettingsDividerShort />
+
+        <SettingsPicker
+          title='Gender'
+          dialogDescription={'Choose your gender: '}
+          valuePlaceholder={this.state.gender}
+          possibleValues={[
+            { label: 'male', value: 'male' },
+            { label: 'female', value: 'female' },
+            { label: 'other', value: 'other' }
+          ]}
+          negativeButtonTitle={'Cancel'}
+          positiveButtonTitle={'Save'}
+          onSaveValue={value => {
+            this.setState({
+              gender: value
+            })
+          }}
+          value={this.state.gender}
+          styleModalButtonsText={{ color: colors.monza }}
+        />
+
+        <SettingsCategoryHeader
+          title={'Notifications'}
+          textStyle={Platform.OS === 'android' ? { color: colors.monza } : null}
+        />
+
+        <SettingsSwitch
+          title={'Allow Push Notifications'}
+          valuePlaceholder={this.state.allowPushNotifications}
+          onSaveValue={value => {
+            this.setState({
+              allowPushNotifications: value
+            })
+          }}
+          value={this.state.allowPushNotifications}
+          thumbTintColor={
+            this.state.allowPushNotifications
+              ? colors.switchEnabled
+              : colors.switchDisabled
+          }
+        />
+
+      </ScrollView>
     )
   }
+}
+
+const colors = {
+  iosSettingsBackground: 'rgb(235,235,241)',
+  white: '#FFFFFF',
+  monza: '#C70039',
+  switchEnabled: Platform.OS === 'android' ? '#C70039' : null,
+  switchDisabled: Platform.OS === 'android' ? '#efeff3' : null,
+  switchOnTintColor: Platform.OS === 'android' ? 'rgba(199, 0, 57, 0.6)' : null,
+  blueGem: '#27139A'
 }
 
 // define your styles

@@ -13,14 +13,14 @@ class HomeScreen extends Component {
       <View style={styles.container}>
         <ChoresAccordionView />
         <View style={styles.addChoreCont}>
-          <Text style={styles.addChoreText}>
-            Your flat chores will show up here
-          </Text>
-          <TouchableOpacity
-            onPress={() => this.props.navigation.navigate('CreateChore')}
-          >
-            <Text style={styles.addChoreButton}> Click here to add one</Text>
-          </TouchableOpacity>
+          <Text style={styles.addChoreText}>Your flat chores will show up here</Text>
+          <Icon
+            raised
+            name='add-circle'
+            size={40}
+            type='font-awesome'
+            color='#ffa18a'
+            onPress={() => this.props.navigation.navigate('CreateChore')} />
         </View>
       </View>
     )
@@ -36,18 +36,15 @@ const styles = StyleSheet.create({
     flexGrow: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    paddingVertical: 16,
+    paddingVertical: 24,
     flexDirection: 'column'
   },
   addChoreText: {
-    color: 'rgba(255,255,255,0.6)',
-    fontSize: 16
-  },
-  addChoreButton: {
     color: '#ffffff',
     fontSize: 16,
-    fontWeight: '700'
-  }
+    paddingBottom: 15
+  },
+
 })
 
 // make this component available to the app

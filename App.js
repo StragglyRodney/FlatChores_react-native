@@ -38,7 +38,9 @@ const AuthStack = createStackNavigator({
 
 /* Define the three stacks in the tab navigator */
 const HomeStack = createStackNavigator({
-  HomeNav: HomeScreen,
+  HomeNav: {
+    screen: HomeScreen
+  },
   CreateChore: CreateChoreScreen
 })
 

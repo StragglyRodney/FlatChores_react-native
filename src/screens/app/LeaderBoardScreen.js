@@ -4,6 +4,9 @@ import { View, Text, StyleSheet } from 'react-native'
 
 // create a component
 class LeaderBoardScreen extends Component {
+  static navigationOptions = {
+    title: 'LeaderBoard'
+  }
   render () {
     return (
       <View style={styles.container}>

@@ -5,17 +5,17 @@ import LoginForm from './AuthComponents/LoginForm'
 import Logo from './AuthComponents/Logo'
 // create a component
 class LoginScreen extends Component {
-  render () {
+  render() {
     return (
       <View style={styles.container}>
-      <Logo/>
-        <LoginForm type = "Login"/>
-          <View style = {styles.signupTextCont}>
-            <Text style = {styles.signupText}>Don't have an account yet?</Text>
-                      <TouchableOpacity onPress={() => this.props.navigation.navigate('Signup')}>
-                          <Text style = {styles.signupButton}> Sign up!</Text>
-                      </TouchableOpacity>
-          </View>
+        <Logo />
+        <LoginForm type="Login" />
+        <View style={styles.signupTextCont}>
+          <Text style={styles.signupText}>Don't have an account yet?</Text>
+          <TouchableOpacity onPress={() => this.props.navigation.navigate('Signup')}>
+            <Text style={styles.signupButton}> Sign up!</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     )
   }
@@ -23,7 +23,7 @@ class LoginScreen extends Component {
 
 // define your styles
 const styles = StyleSheet.create({
-  container : {
+  container: {
     backgroundColor: '#00c2cc',
     flex: 1,
     alignItems: 'center',
@@ -36,15 +36,15 @@ const styles = StyleSheet.create({
     paddingVertical: 16,
     flexDirection: 'row'
   },
- signupText: {
-     color: 'rgba(255,255,255,0.6)',
-     fontSize: 16,
- },
- signupButton: {
-  color: '#ffffff',
-  fontSize: 16,
-  fontWeight: '700'
- }
+  signupText: {
+    color: 'rgba(255,255,255,0.6)',
+    fontSize: 16,
+  },
+  signupButton: {
+    color: '#ffffff',
+    fontSize: 16,
+    fontWeight: '700'
+  }
 })
 
 // make this component available to the app

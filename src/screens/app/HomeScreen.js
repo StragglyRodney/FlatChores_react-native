@@ -1,20 +1,21 @@
 // import liraries
 import React, { Component } from 'react'
-import { View, Text, StyleSheet, Button } from 'react-native'
+import { View, Text, StyleSheet, Button, TouchableOpacity } from 'react-native'
 
 import { createStackNavigator } from 'react-navigation'
 import Icon from 'react-native-vector-icons/MaterialIcons'
 
 // create a component
 class HomeScreen extends Component {
-  render () {
+  render() {
     return (
       <View style={styles.container}>
-        <Text>HomeScreen</Text>
-        <Button
-          title='CreateChoreScreen'
-          onPress={() => this.props.navigation.navigate('CreateChore')}
-        />
+        <View style={styles.addChoreCont}>
+          <Text style={styles.addChoreText}>Your flat chores will show up here</Text>
+          <TouchableOpacity onPress={() => this.props.navigation.navigate('CreateChore')}>
+            <Text style={styles.addChoreButton}> Click here to add one</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     )
   }
@@ -27,6 +28,22 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#00c2cc'
+  },
+  addChoreCont: {
+    flexGrow: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingVertical: 16,
+    flexDirection: 'column'
+  },
+  addChoreText: {
+    color: 'rgba(255,255,255,0.6)',
+    fontSize: 16,
+  },
+  addChoreButton: {
+    color: '#ffffff',
+    fontSize: 16,
+    fontWeight: '700'
   }
 })
 

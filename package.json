@@ -7,9 +7,11 @@
     "test": "jest"
   },
   "dependencies": {
+    "giphy-api": "^1.2.7",
     "react": "16.5.0",
     "react-native": "0.57.0",
     "react-native-paper": "^2.0.1",
+    "react-native-settings-components": "0.0.1",
     "react-native-vector-icons": "^5.0.0",
     "react-navigation": "git+https://github.com/react-community/react-navigation.git",
     "react-navigation-material-bottom-tabs": "^0.4.0"

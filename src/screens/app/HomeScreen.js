@@ -5,16 +5,20 @@ import { View, Text, StyleSheet, Button, TouchableOpacity } from 'react-native'
 import { createStackNavigator } from 'react-navigation'
 import Icon from 'react-native-vector-icons/MaterialIcons'
 
-// create a component
+import ChoresAccordionView from './components/ChoresAccordionView'
+
 class HomeScreen extends Component {
-
-  render() {
-
+  render () {
     return (
       <View style={styles.container}>
+        <ChoresAccordionView />
         <View style={styles.addChoreCont}>
-          <Text style={styles.addChoreText}>Your flat chores will show up here</Text>
-          <TouchableOpacity onPress={() => this.props.navigation.navigate('CreateChore')}>
+          <Text style={styles.addChoreText}>
+            Your flat chores will show up here
+          </Text>
+          <TouchableOpacity
+            onPress={() => this.props.navigation.navigate('CreateChore')}
+          >
             <Text style={styles.addChoreButton}> Click here to add one</Text>
           </TouchableOpacity>
         </View>
@@ -26,9 +30,6 @@ class HomeScreen extends Component {
 // define your styles
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
     backgroundColor: '#00c2cc'
   },
   addChoreCont: {
@@ -40,7 +41,7 @@ const styles = StyleSheet.create({
   },
   addChoreText: {
     color: 'rgba(255,255,255,0.6)',
-    fontSize: 16,
+    fontSize: 16
   },
   addChoreButton: {
     color: '#ffffff',

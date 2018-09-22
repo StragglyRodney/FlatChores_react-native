@@ -1,6 +1,13 @@
 // import liraries
 import React, { Component } from 'react'
-import { View, Text, StyleSheet, Button, TouchableOpacity } from 'react-native'
+import {
+  View,
+  Text,
+  StyleSheet,
+  Button,
+  TouchableOpacity,
+  ScrollView
+} from 'react-native'
 
 import { createStackNavigator } from 'react-navigation'
 import Icon from 'react-native-vector-icons/MaterialIcons'
@@ -10,19 +17,22 @@ import ChoresAccordionView from './components/ChoresAccordionView'
 class HomeScreen extends Component {
   render () {
     return (
-      <View style={styles.container}>
+      <ScrollView style={styles.container}>
         <ChoresAccordionView />
         <View style={styles.addChoreCont}>
-          <Text style={styles.addChoreText}>Your flat chores will show up here</Text>
+          <Text style={styles.addChoreText}>
+            Your flat chores will show up here
+          </Text>
           <Icon
             raised
             name='add-circle'
             size={40}
             type='font-awesome'
             color='#ffa18a'
-            onPress={() => this.props.navigation.navigate('CreateChore')} />
+            onPress={() => this.props.navigation.navigate('CreateChore')}
+          />
         </View>
-      </View>
+      </ScrollView>
     )
   }
 }
@@ -43,8 +53,7 @@ const styles = StyleSheet.create({
     color: '#ffffff',
     fontSize: 16,
     paddingBottom: 15
-  },
-
+  }
 })
 
 // make this component available to the app

@@ -62,7 +62,7 @@ const styles = StyleSheet.create({
     marginBottom: 20
   },
   header: {
-    backgroundColor: '#F5FCFF',
+    backgroundColor: '#b2ebf2',
     padding: 30,
     borderBottomColor: '#bbb',
     borderBottomWidth: StyleSheet.hairlineWidth
@@ -74,7 +74,7 @@ const styles = StyleSheet.create({
   },
   content: {
     padding: 20,
-    backgroundColor: '#fff'
+    backgroundColor: '#F5FCFF'
   },
   active: {
     backgroundColor: 'rgba(255,255,255,1)'

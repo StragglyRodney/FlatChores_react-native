@@ -1,53 +1,63 @@
 // import liraries
 import React, { Component } from "react";
-import { View, StyleSheet, ScrollView, Button } from "react-native";
-import { SearchBar, ListItem } from "react-native-elements";
+import { View, StyleSheet, ScrollView,Text, TouchableOpacity } from "react-native";
+import {ListItem } from "react-native-elements";
+import SearchInput, { createFilter } from 'react-native-search-filter';
 import Icon from "react-native-vector-icons/MaterialIcons";
 import Stepper from "react-native-js-stepper";
+import { Button } from 'react-native-elements';
 
-const list = [
+const emails = [
   {
     name: "Amy Farha",
     avatar_url:
       "https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg",
-    subtitle: "Vice President"
+    subject: "Vice President"
   },
   {
     name: "Jack Jackson",
     avatar_url:
       "https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg",
-    subtitle: "Vice Chairman"
+    subject: "Vice Chairman"
   },
   {
     name: "Ben Rickman",
     avatar_url:
       "https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg",
-    subtitle: "Vice Chairman"
+    subject: "Vice Chairman"
   },
   {
     name: "Angela Roskam",
     avatar_url:
       "https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg",
-    subtitle: "Vice Chairman"
+    subject: "Vice Chairman"
   },
   {
     name: "Ben Rickman",
     avatar_url:
       "https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg",
-    subtitle: "Vice Chairman"
+    subject: "Vice Chairman"
   },
   {
     name: "Angela Roskam",
     avatar_url:
       "https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg",
-    subtitle: "Vice Chairman"
+    subject: "Vice Chairman"
   }
 ];
 
  Props = {}
+ const suggestedFlatmates=[];
+ const KEYS_TO_FILTERS = ['name', 'subject'];
 
 class CreateFlatScreen extends Component {
   
+  constructor(props) {
+    super(props);
+    this.state = { text: "Useless Placeholder", textInput: "hello",searchTerm:''};
+    this.onClickNext = this.onClickNext.bind(this);
+  }
+
 
   static navigationOptions = {
     tabBarIcon: <Icon name="weekend" size={25} />,
@@ -56,12 +66,6 @@ class CreateFlatScreen extends Component {
     shifting: true
   };
 
-  constructor(props) {
-    super(props);
-    this.state = { text: "Useless Placeholder", textInput: "hello"};
-    this.onClickNext = this.onClickNext.bind(this);
-  }
-
   onClickNext() {
     const { steps, currentStep } = this.state;
     this.setState({
@@ -69,38 +73,31 @@ class CreateFlatScreen extends Component {
     });
   }
 
+  searchUpdated(term) {
+    this.setState({ searchTerm: term })
+  }
+
   render() {
+    const filteredEmails = emails.filter(createFilter(this.state.searchTerm, KEYS_TO_FILTERS))
     return (
       <View style={styles.container}>
-        <SearchBar
-          clearIcon
-          inputStyle={{
-            backgroundColor: "lightgrey",
-            color: "black"
-          }}
-          containerStyle={{
-            backgroundColor: "transparent",
-            borderTopWidth: 0,
-            borderBottomWidth: 0
-          }}
-          onChangeText={value => {
-            this.setState({ textInput: value });
-          }}
-          onClear={() => {}}
-          onCancel={() => {}}
-          cancelButtonTitle="Cancel"
-          placeholder="search flatmates here"
-        />
+      <SearchInput 
+          onChangeText={(term) => { this.searchUpdated(term) }} 
+          style={styles.searchInput}
+          placeholder="Type a message to search"
+          />
         <ScrollView>
-          {list.map((l, i) => (
-            <ListItem
-              key={i}
-              leftAvatar={{ source: { uri: l.avatar_url } }}
-              title={l.name}
-              subtitle={l.subtitle}
+          {filteredEmails.map(email => {
+            return (
+              <ListItem
+              key={email.id}
+              leftAvatar={{ source: { uri: email.avatar_url } }}
+              title={email.name}
+              subtitle={email.subtitle}
               onPress={() => this.props.navigation.navigate("ViewProfile")}
             />
-          ))}
+            )
+          })}
         </ScrollView>
         <Stepper
           validation={true}
@@ -164,6 +161,19 @@ const styles = StyleSheet.create({
   },
   progressStep:{
     
+  },
+  emailItem:{
+    borderBottomWidth: 0.5,
+    borderColor: 'rgba(0,0,0,0.3)',
+    padding: 10
+  },
+  emailSubject: {
+    color: 'rgba(0,0,0,0.5)'
+  },
+  searchInput:{
+    padding: 10,
+    borderColor: '#CCC',
+    borderWidth: 1
   }
 });
 

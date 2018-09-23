@@ -1,11 +1,17 @@
 // import liraries
 import React, { Component } from "react";
-import { View, StyleSheet, ScrollView,Text, TouchableOpacity } from "react-native";
-import {ListItem } from "react-native-elements";
-import SearchInput, { createFilter } from 'react-native-search-filter';
+import {
+  View,
+  StyleSheet,
+  ScrollView,
+  Text,
+  TouchableOpacity
+} from "react-native";
+import { ListItem } from "react-native-elements";
+import SearchInput, { createFilter } from "react-native-search-filter";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import Stepper from "react-native-js-stepper";
-import { Button } from 'react-native-elements';
+import { Button } from "react-native-elements";
 
 const emails = [
   {
@@ -46,18 +52,59 @@ const emails = [
   }
 ];
 
- Props = {}
- const suggestedFlatmates=[];
- const KEYS_TO_FILTERS = ['name', 'subject'];
+const flatmates = [
+  {
+    name: "Amy Farha",
+    avatar_url:
+      "https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg",
+    subject: "Vice President"
+  },
+  {
+    name: "Jack Jackson",
+    avatar_url:
+      "https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg",
+    subject: "Vice Chairman"
+  },
+  {
+    name: "Ben Rickman",
+    avatar_url:
+      "https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg",
+    subject: "Vice Chairman"
+  },
+  {
+    name: "Angela Roskam",
+    avatar_url:
+      "https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg",
+    subject: "Vice Chairman"
+  },
+  {
+    name: "Ben Rickman",
+    avatar_url:
+      "https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg",
+    subject: "Vice Chairman"
+  },
+  {
+    name: "Angela Roskam",
+    avatar_url:
+      "https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg",
+    subject: "Vice Chairman"
+  }
+];
+
+Props = {};
+const suggestedFlatmates = [];
+const KEYS_TO_FILTERS = ["name", "subject"];
 
 class CreateFlatScreen extends Component {
-  
   constructor(props) {
     super(props);
-    this.state = { text: "Useless Placeholder", textInput: "hello",searchTerm:''};
+    this.state = {
+      text: "Useless Placeholder",
+      textInput: "hello",
+      searchTerm: ""
+    };
     this.onClickNext = this.onClickNext.bind(this);
   }
-
 
   static navigationOptions = {
     tabBarIcon: <Icon name="weekend" size={25} />,
@@ -74,107 +121,152 @@ class CreateFlatScreen extends Component {
   }
 
   searchUpdated(term) {
-    this.setState({ searchTerm: term })
+    this.setState({ searchTerm: term });
   }
 
   render() {
-    const filteredEmails = emails.filter(createFilter(this.state.searchTerm, KEYS_TO_FILTERS))
+    filteredEmails = emails.filter(
+      createFilter(this.state.searchTerm, KEYS_TO_FILTERS)
+    );
+    filteredEmails = filteredEmails.slice(0, 3);
+    if (this.state.searchTerm.length == 0) {
+      filteredEmails = [];
+    }
     return (
       <View style={styles.container}>
-      <SearchInput 
-          onChangeText={(term) => { this.searchUpdated(term) }} 
+        <SearchInput
+          style={styles.container}
+          onChangeText={term => {
+            this.searchUpdated(term);
+          }}
           style={styles.searchInput}
-          placeholder="Type a message to search"
-          />
-        <ScrollView>
-          {filteredEmails.map(email => {
-            return (
+          placeholder="Search for your flatmates!!"
+        />
+
+        <View style={styles.scrollView}>
+          <ScrollView>
+            {filteredEmails.map(email => {
+              return (
+                <ListItem
+                  key={email.id}
+                  leftAvatar={{ source: { uri: email.avatar_url } }}
+                  title={email.name}
+                  subtitle={email.subject}
+                  onPress={() => this.props.navigation.navigate("ViewProfile")}
+                />
+              );
+            })}
+
+            <Text style={styles.yourFlatText}>myFlatmates</Text>
+
+            {flatmates.map((l, i) => (
               <ListItem
-              key={email.id}
-              leftAvatar={{ source: { uri: email.avatar_url } }}
-              title={email.name}
-              subtitle={email.subtitle}
-              onPress={() => this.props.navigation.navigate("ViewProfile")}
-            />
-            )
-          })}
-        </ScrollView>
-        <Stepper
-          validation={true}
-          activeDotStyle={styles.activeDot}
-          inactiveDotStyle={styles.inactiveDot}
-          showTopStepper={true}
-          showBottomStepper={true}
-          steps={["Step 1", "Step 2"]}
-          backButtonTitle="BACK"
-          onPressNext={this.nextPage.bind(this)}
-          onPress={true}
-          nextButtonTitle="NEXT"
-          activeStepStyle={styles.activeStep}
-          inactiveStepStyle={styles.inactiveStep}
-          activeStepTitleStyle={styles.activeStepTitle}
-          inactiveStepTitleStyle={styles.inactiveStepTitle}
-          activeStepNumberStyle={styles.activeStepNumber}
-          inactiveStepNumberStyle={styles.inactiveStepNumber}
-          onScrollPage={true}
-        >
-          <View />
-          <View />
-        </Stepper>
+                key={i}
+                leftAvatar={{ source: { uri: l.avatar_url } }}
+                title={l.name}
+                subtitle={l.subtitle}
+                onPress={() => this.props.navigation.navigate("ViewProfile")}
+              />
+            ))}
+          </ScrollView>
+        </View>
+
+        <View style={styles.stepper}>
+          <Stepper
+            validation={false}
+            activeDotStyle={styles.activeDot}
+            inactiveDotStyle={styles.inactiveDot}
+            showTopStepper={false}
+            showBottomStepper={true}
+            backButtonTitle="BACK"
+            onPressNext={this.nextPage.bind(this)}
+            nextButtonTitle="NEXT"
+            activeStepStyle={styles.activeStep}
+            inactiveStepStyle={styles.inactiveStep}
+            activeStepTitleStyle={styles.activeStepTitle}
+            inactiveStepTitleStyle={styles.inactiveStepTitle}
+            activeStepNumberStyle={styles.activeStepNumber}
+            inactiveStepNumberStyle={styles.inactiveStepNumber}
+          >
+            <View />
+            <View />
+          </Stepper>
+        </View>
       </View>
     );
   }
 
-  nextPage(){
-    () => this.props.navigation.navigate("ViewProfile")
+  nextPage() {
+    () => this.props.navigation.navigate("ViewProfile");
   }
 }
 
 // define your styles
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "#2c3e50"
+    backgroundColor: "#00c2cc",
+    flex: 1,
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "stretch"
   },
   activeDot: {
-    backgroundColor: 'grey'
+    backgroundColor: "grey"
   },
   inactiveDot: {
-    backgroundColor: '#ededed'
+    backgroundColor: "#ededed"
   },
   activeStep: {
-    backgroundColor: 'grey'
+    backgroundColor: "grey"
   },
   inactiveStep: {
-    backgroundColor: '#ededed'
+    backgroundColor: "#ededed"
   },
   activeStepTitle: {
-    fontWeight: 'bold'
+    fontWeight: "bold"
   },
   inactiveStepTitle: {
-    fontWeight: 'normal'
+    fontWeight: "normal"
   },
   activeStepNumber: {
-    color: 'white'
+    color: "white"
   },
   inactiveStepNumber: {
-    color: 'black'
+    color: "black"
   },
-  progressStep:{
-    
-  },
-  emailItem:{
+  progressStep: {},
+  emailItem: {
     borderBottomWidth: 0.5,
-    borderColor: 'rgba(0,0,0,0.3)',
-    padding: 10
+    borderColor: "rgba(0,0,0,0.3)"
+
   },
   emailSubject: {
-    color: 'rgba(0,0,0,0.5)'
+    color: "rgba(0,0,0,0.5)"
   },
-  searchInput:{
+  searchInput: {
     padding: 10,
-    borderColor: '#CCC',
+    borderColor: "#CCC",
     borderWidth: 1
+  },
+  yourFlatText: {
+    textAlign: "center", // <-- the magic
+    fontWeight: "bold",
+    fontSize: 36,
+    fontFamily: "Georgia",
+    backgroundColor:"#ffffff"
+
+  },
+  scrollView: {
+    bottom: 0,
+    height: 500
+  },
+  stepper:{
+    flex:1,
+    bottom:0,
+    padding:0,
+    backgroundColor:"#ffffff"
   }
+  
 });
 
 // make this component available to the app

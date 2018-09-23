@@ -2,20 +2,26 @@
 import React, { Component } from 'react'
 import { View, Text, StyleSheet, Button } from 'react-native'
 
+import Icon from 'react-native-vector-icons/MaterialIcons'
+
 // create a component
-class ChoresAccordionView extends Component {
+class ViewProfile extends Component {
+  static navigationOptions = {
+    tabBarIcon: <Icon name='weekend' size={25} />,
+    tabBarLabel: 'Flat',
+    tabBarColor: '#3a1c31',
+    shifting: true
+  }
   render () {
     return (
       <View style={styles.container}>
-        <Text>ProfileScreen</Text>
-        <Button
-          title='Go Back'
-          onPress={() => this.props.navigation.navigate('Settings')}
-        />
+      <Text>d</Text>
       </View>
     )
   }
 }
+
+
 
 // define your styles
 const styles = StyleSheet.create({
@@ -23,9 +29,9 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#00c2cc'
+    backgroundColor: '#2c3e50'
   }
 })
 
 // make this component available to the app
-export default ChoresAccordionView
+export default ViewProfile

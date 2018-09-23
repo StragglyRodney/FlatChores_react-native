@@ -7,11 +7,10 @@ import {
   Text,
   TouchableOpacity
 } from "react-native";
-import { ListItem } from "react-native-elements";
+import { ListItem, Button } from "react-native-elements";
 import SearchInput, { createFilter } from "react-native-search-filter";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import Stepper from "react-native-js-stepper";
-import { Button } from "react-native-elements";
 
 const emails = [
   {

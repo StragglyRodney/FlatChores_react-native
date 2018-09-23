@@ -3,32 +3,33 @@ import React, { Component } from "react";
 import { View, Text, StyleSheet } from "react-native";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import { Button } from 'react-native-elements';
+import { createStackNavigator } from 'react-navigation'
+
 // create a component
 class FlatScreen extends Component {
+
   static navigationOptions = {
-    tabBarIcon: <Icon name="weekend" size={25} />,
-    tabBarLabel: "Flat",
-    tabBarColor: "#3a1c31",
-    shifting: true
-  };
+    title: 'CREATE A FLAT'
+  }
+
   render() {
     return (
       <View style={styles.container}>
         <Button
           onPress={() => this.props.navigation.navigate("CreateFlat")}
+          titleStyle={styles.buttonText}
+          buttonStyle={styles.buttonStyle}
           title="Create a Flat!"
           color="#ffffff"
           accessibilityLabel="Create chores and put your flatmates to work!"
-          titleStyle={{ fontWeight: "700" }}
-          buttonStyle={styles.buttonStyle}
         />
         <Button
           buttonStyle={styles.buttonStyle}
+          titleStyle={styles.buttonText}
           onPress={() => this.props.navigation.navigate("JoinFlat")}
           title="Join a Flat!"
           color="#ffffff"
           accessibilityLabel="Join an existing flat using the flatID!"
-          itleStyle={{ fontWeight: "700" }}
         />
       </View>
     );
@@ -44,14 +45,22 @@ const styles = StyleSheet.create({
     backgroundColor: "#00c2cc"
   },
   buttonStyle: {
-    backgroundColor: "#cc3600",
-    width: 300,
+    backgroundColor: "#ffa18a",
+    width: 320,
     height: 45,
     margin: 10,
     borderColor: "transparent",
     borderWidth: 0,
-    borderRadius: 5
-  }
+    borderRadius: 10,
+    
+  },
+  buttonText: {
+    width: 300,
+    fontSize: 20,
+    fontWeight: '500',
+    color: '#ffffff',
+    textAlign: 'center'
+  },
 });
 
 // make this component available to the app

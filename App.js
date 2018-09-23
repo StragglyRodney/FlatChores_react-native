@@ -28,6 +28,10 @@ import CreateChoreScreen from './src/screens/app/CreateChoreScreen'
 import NotificationsScreen from './src/screens/app/NotificationsScreen'
 import ProfileScreen from './src/screens/app/ProfileScreen'
 import LeaderBoardScreen from './src/screens/app/LeaderBoardScreen'
+import CreateFlatScreen from './src/screens/app/CreateFlatScreen'
+import JoinFlatScreen from './src/screens/app/JoinFlatScreen'
+import ViewProfile from './src/screens/app/ViewProfile'
+
 
 /* Define the startup (authentication) stack */
 const AuthStack = createStackNavigator({
@@ -38,14 +42,15 @@ const AuthStack = createStackNavigator({
 
 /* Define the three stacks in the tab navigator */
 const HomeStack = createStackNavigator({
-  HomeNav: {
-    screen: HomeScreen
-  },
+  HomeNav: HomeScreen,
   CreateChore: CreateChoreScreen
 })
 
 const FlatStack = createStackNavigator({
-  Flat: FlatScreen
+  Flat: FlatScreen,
+  CreateFlat: CreateFlatScreen,
+  JoinFlat: JoinFlatScreen,
+  ViewProfile: ViewProfile
 })
 
 const SettingsStack = createStackNavigator({
@@ -76,8 +81,8 @@ const AppTab = createMaterialBottomTabNavigator(
       screen: HomeStack,
       navigationOptions: {
         tabBarIcon: <Icon name='people' size={25} />,
-        tabBarLabel: 'Chores',
-        tabBarColor: '#b2ebf2',
+        tabBarLabel: 'Home',
+        tabBarColor: '#1c313a',
         shifting: true
       }
     },
@@ -85,8 +90,8 @@ const AppTab = createMaterialBottomTabNavigator(
       screen: FlatStack,
       navigationOptions: {
         tabBarIcon: <Icon name='weekend' size={25} />,
-        tabBarLabel: 'Your Flat',
-        tabBarColor: '#80deea',
+        tabBarLabel: 'Flat',
+        tabBarColor: '#3a1c31',
         shifting: true
       }
     },
@@ -95,7 +100,7 @@ const AppTab = createMaterialBottomTabNavigator(
       navigationOptions: {
         tabBarIcon: <Icon name='reorder' size={25} />,
         tabBarLabel: 'LeaderBoard',
-        tabBarColor: '#4dd0e1',
+        tabBarColor: '#ff0000',
         shifting: true
       }
     },
@@ -104,7 +109,7 @@ const AppTab = createMaterialBottomTabNavigator(
       navigationOptions: {
         tabBarIcon: <Icon name='account-circle' size={25} />,
         tabBarLabel: 'Settings',
-        tabBarColor: '#26c6da',
+        tabBarColor: '#313a1c',
         shifting: true
       }
     }

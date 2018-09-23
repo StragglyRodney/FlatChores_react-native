@@ -10,11 +10,16 @@
     "giphy-api": "^1.2.7",
     "react": "16.5.0",
     "react-native": "0.57.0",
+    "react-native-accordion": "^1.0.1",
+    "react-native-elements": "^1.0.0-beta4",
+    "react-native-js-stepper": "^0.2.1",
     "react-native-paper": "^2.0.1",
+    "react-native-search-filter": "^0.1.4",
     "react-native-settings-components": "0.0.1",
     "react-native-vector-icons": "^5.0.0",
     "react-navigation": "git+https://github.com/react-community/react-navigation.git",
-    "react-navigation-material-bottom-tabs": "^0.4.0"
+    "react-navigation-material-bottom-tabs": "^0.4.0",
+    "react-stepper-horizontal": "^1.0.11"
   },
   "devDependencies": {
     "babel-jest": "23.6.0",

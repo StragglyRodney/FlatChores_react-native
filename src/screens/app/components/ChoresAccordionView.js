@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { View, Text, StyleSheet } from 'react-native'
+import Collapsible from 'react-native-collapsible'
 import Accordion from 'react-native-collapsible/Accordion'
 
 const SECTIONS = [

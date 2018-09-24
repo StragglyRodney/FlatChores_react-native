@@ -1,17 +1,34 @@
 // import liraries
 import React, { Component } from 'react'
 import { View, Text, StyleSheet } from 'react-native'
+import Leaderboard from 'react-native-leaderboard';
+import PropTypes from 'prop-types'; // ES6
+
+
 
 // create a component
 class LeaderBoardScreen extends Component {
   static navigationOptions = {
     title: 'LeaderBoard'
   }
-  render () {
+
+  state = {
+    data: [
+      { userName: 'Joe', highScore: 52 },
+      { userName: 'Jenny', highScore: 120 },
+      { userName: 'Dan', highScore: 1220 },
+      { userName: 'Andy', highScore: 10 },
+      { userName: 'Rodney', highScore: 69 },
+      //...
+    ] //can also be an object of objects!: data: {a:{}, b:{}}
+  }
+
+  render() {
     return (
-      <View style={styles.container}>
-        <Text>LeaderBoardScreen</Text>
-      </View>
+      <Leaderboard
+        data={this.state.data}
+        sortBy='highScore'
+        labelBy='userName' />
     )
   }
 }

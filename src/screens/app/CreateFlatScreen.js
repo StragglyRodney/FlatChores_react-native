@@ -1,23 +1,32 @@
 // import liraries
 import React, { Component } from "react";
-import {View, StyleSheet, ScrollView, Text, TouchableOpacity, navigationOptions} from "react-native";
+import {
+  View,
+  StyleSheet,
+  ScrollView,
+  Text,
+  TouchableOpacity,
+  navigationOptions
+} from "react-native";
 import { ListItem, Button } from "react-native-elements";
 import Stepper from "react-native-js-stepper";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import AddFlatMateScreen from "./AddFlatMateScreen";
 
-const flatmates = [ {
-  name: "Amy Farha",
-  avatar_url:
-    "https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg",
-  subject: "Vice President"
-},
-{
-  name: "Jack Jackson",
-  avatar_url:
-    "https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg",
-  subject: "Vice Chairman"
-}]; //the flatmates that the user has added to their flat
+const flatmates = [
+  {
+    name: "Amy Farha",
+    avatar_url:
+      "https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg",
+    subject: "Vice President"
+  },
+  {
+    name: "Jack Jackson",
+    avatar_url:
+      "https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg",
+    subject: "Vice Chairman"
+  }
+];
 
 class CreateFlatScreen extends Component {
   static navigationOptions = {
@@ -26,6 +35,9 @@ class CreateFlatScreen extends Component {
 
   constructor(props) {
     super(props);
+    this.state = {
+      page: 1
+    }
   }
 
   onClickNext() {
@@ -36,6 +48,20 @@ class CreateFlatScreen extends Component {
   }
 
   render() {
+    if(this.state.page == 1){
+      return (this.getViewOne()
+    )
+    }
+    else{
+      return this.getViewTwo()
+    }
+  }
+
+  nextPage() {
+    () => this.props.navigation.navigate("ViewProfile");
+  }
+
+  getViewOne() {
     return (
       <View style={styles.container}>
         <View style={styles.title}>
@@ -52,26 +78,22 @@ class CreateFlatScreen extends Component {
             onPress={() => this.props.navigation.navigate("AddFlatMate")}
           />
         </View>
-        <View style={styles.break}>
-          
-        </View>
+
+        <View style={styles.break} />
+
         <ScrollView>
           {flatmates.map((l, i) => (
             <ListItem
               key={i}
               leftAvatar={{ source: { uri: l.avatar_url } }}
-              rightIcon={<Icon
-                raised
-                name="arrow-forward"
-                size={30}
-              />}
+              rightIcon={<Icon raised name="arrow-forward" size={30} />}
               title={l.name}
               subtitle={l.subtitle}
               onPress={() => this.props.navigation.navigate("ViewProfile")}
             />
           ))}
         </ScrollView>
-      
+
         <View style={styles.stepper}>
           <Stepper
             validation={false}
@@ -80,7 +102,12 @@ class CreateFlatScreen extends Component {
             showTopStepper={false}
             showBottomStepper={true}
             backButtonTitle="BACK"
-            onPressNext={this.nextPage.bind(this)}
+            onPressNext = {() => {
+              
+              this.setState({
+                page: 2,
+              })
+            }}
             nextButtonTitle="NEXT"
             activeStepStyle={styles.activeStep}
             inactiveStepStyle={styles.inactiveStep}
@@ -95,12 +122,50 @@ class CreateFlatScreen extends Component {
         </View>
       </View>
     );
-  }
 
-  nextPage() {
-    () => this.props.navigation.navigate("ViewProfile");
+  }
+  getViewTwo(){
+    return( <View style={styles.container}>
+      <Text>Create Flat Name</Text>
+     
+       <View style={styles.stepper}>
+          <Stepper
+            
+            initialPage={2}
+            validation={false}
+            activeDotStyle={styles.activeDot}
+            inactiveDotStyle={styles.inactiveDot}
+            showTopStepper={false}
+            showBottomStepper={true}
+            backButtonTitle="BACK"
+            onPressNext = {() => {
+              this.setState({
+                page: 2
+              })
+            }}
+            onPressBack={()=>
+              this.setState({page:1})
+
+            }
+            nextButtonTitle="NEXT"
+            activeStepStyle={styles.activeStep}
+            inactiveStepStyle={styles.inactiveStep}
+            activeStepTitleStyle={styles.activeStepTitle}
+            inactiveStepTitleStyle={styles.inactiveStepTitle}
+            activeStepNumberStyle={styles.activeStepNumber}
+            inactiveStepNumberStyle={styles.inactiveStepNumber}
+          >
+            <View />
+            <View />
+          </Stepper>
+        </View>
+    </View>
+    
+  );
+  
   }
 }
+
 
 // define your styles
 const styles = StyleSheet.create({
@@ -130,18 +195,17 @@ const styles = StyleSheet.create({
   },
   title: {
     backgroundColor: "#00c2cc",
-    paddingTop:20,
-    paddingBottom:20,
-  
+    paddingTop: 20,
+    paddingBottom: 20
   },
   iconView: {
     position: "absolute",
     top: 65,
-    left: 25,
+    left: 25
   },
   scrollView: {
     bottom: 0,
-    height: 450,
+    height: 450
   },
   stepper: {
     flex: 1,
@@ -150,7 +214,31 @@ const styles = StyleSheet.create({
     backgroundColor: "#ffffff"
   },
   break: {
-    height:30
+    height: 30
+  },
+  activeDot: {
+    backgroundColor: 'grey'
+  },
+  inactiveDot: {
+    backgroundColor: '#ededed'
+  },
+  activeStep: {
+    backgroundColor: 'grey'
+  },
+  inactiveStep: {
+    backgroundColor: '#ededed'
+  },
+  activeStepTitle: {
+    fontWeight: 'bold'
+  },
+  inactiveStepTitle: {
+    fontWeight: 'normal'
+  },
+  activeStepNumber: {
+    color: 'white'
+  },
+  inactiveStepNumber: {
+    color: 'black'
   }
 });
 

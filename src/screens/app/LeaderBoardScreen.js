@@ -66,7 +66,7 @@ class LeaderBoardScreen extends Component {
             renderBackground={() => (
               <View key="background">
                 <Image source={{
-                  uri: '/Users/danielwalker/Desktop/2018 T2/SWEN325/A2/FlatChores_react-native/src/Images/wood.jpg',
+                  uri: 'https://i.imgur.com/yn23LX6.jpg',
                   width: window.width,
                   height: PARALLAX_HEADER_HEIGHT
                 }} />
@@ -83,7 +83,7 @@ class LeaderBoardScreen extends Component {
             renderForeground={() => (
               <View key="parallax-header" style={styles.parallaxHeader}>
                 <Image style={styles.avatar} source={{
-                  uri: '/Users/danielwalker/Desktop/2018 T2/SWEN325/A2/FlatChores_react-native/src/Images/trophy.png',
+                  uri: 'https://i.imgur.com/wx6KuDO.png',
                   width: AVATAR_SIZE,
                   height: AVATAR_SIZE
                 }} />

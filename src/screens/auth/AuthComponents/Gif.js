@@ -7,7 +7,7 @@ export default class Gif extends React.Component {
             <View style={styles.container}>
                 <View style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, justifyContent: 'center', alignItems: 'center' }}>
                     <Image style={styles.imageContainer}
-                        source={{ uri: '/Users/danielwalker/Desktop/2018 T2/SWEN325/A2/FlatChores_react-native/src/screens/auth/Images/giphy.gif' }} />
+                        source={{ uri: 'https://i.imgur.com/gh3Xfzx.gif' }} />
                 </View>
                 <View style={styles.overlay} />
             </View >

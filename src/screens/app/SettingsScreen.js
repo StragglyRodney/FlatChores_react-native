@@ -26,9 +26,11 @@ class SettingsScreen extends Component {
   }
   constructor () {
     super()
+    // TODO: Make these global
     this.state = {
       username: '',
       allowPushNotifications: false,
+      allowLocationServices: false,
       gender: ''
     }
   }
@@ -106,6 +108,27 @@ class SettingsScreen extends Component {
           value={this.state.allowPushNotifications}
           thumbTintColor={
             this.state.allowPushNotifications
+              ? colors.switchEnabled
+              : colors.switchDisabled
+          }
+        />
+
+        <SettingsCategoryHeader
+          title={'Other'}
+          textStyle={Platform.OS === 'android' ? { color: colors.monza } : null}
+        />
+
+        <SettingsSwitch
+          title={'Allow Location Services'}
+          valuePlaceholder={this.state.allowLocationServices}
+          onSaveValue={value => {
+            this.setState({
+              allowLocationServices: value
+            })
+          }}
+          value={this.state.allowLocationServices}
+          thumbTintColor={
+            this.state.allowLocationServices
               ? colors.switchEnabled
               : colors.switchDisabled
           }

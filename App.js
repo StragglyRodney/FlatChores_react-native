@@ -31,6 +31,8 @@ import LeaderBoardScreen from './src/screens/app/LeaderBoardScreen'
 import CreateFlatScreen from './src/screens/app/CreateFlatScreen'
 import JoinFlatScreen from './src/screens/app/JoinFlatScreen'
 import ViewProfile from './src/screens/app/ViewProfile'
+import AddFlatMateScreen from './src/screens/app/AddFlatMateScreen'
+
 
 
 /* Define the startup (authentication) stack */
@@ -50,7 +52,8 @@ const FlatStack = createStackNavigator({
   Flat: FlatScreen,
   CreateFlat: CreateFlatScreen,
   JoinFlat: JoinFlatScreen,
-  ViewProfile: ViewProfile
+  ViewProfile: ViewProfile,
+  AddFlatMate: AddFlatMateScreen,
 })
 
 const SettingsStack = createStackNavigator({

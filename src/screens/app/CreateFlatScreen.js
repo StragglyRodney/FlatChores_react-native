@@ -1,9 +1,10 @@
 // import liraries
 import React, { Component } from "react";
-import {View, StyleSheet, ScrollView, Text, TouchableOpacity} from "react-native";
+import {View, StyleSheet, ScrollView, Text, TouchableOpacity, navigationOptions} from "react-native";
 import { ListItem, Button } from "react-native-elements";
 import Stepper from "react-native-js-stepper";
 import Icon from "react-native-vector-icons/MaterialIcons";
+import AddFlatMateScreen from "./AddFlatMateScreen";
 
 const flatmates = [ {
   name: "Amy Farha",
@@ -59,13 +60,18 @@ class CreateFlatScreen extends Component {
             <ListItem
               key={i}
               leftAvatar={{ source: { uri: l.avatar_url } }}
+              rightIcon={<Icon
+                raised
+                name="arrow-forward"
+                size={30}
+              />}
               title={l.name}
               subtitle={l.subtitle}
               onPress={() => this.props.navigation.navigate("ViewProfile")}
             />
           ))}
         </ScrollView>
-
+      
         <View style={styles.stepper}>
           <Stepper
             validation={false}

@@ -2,8 +2,9 @@
 import React, { Component } from "react";
 import {View, StyleSheet, ScrollView, Text, TouchableOpacity} from "react-native";
 import { ListItem, Button } from "react-native-elements";
-import SearchInput, { createFilter } from "react-native-search-filter";
 
+import Icon from "react-native-vector-icons/MaterialIcons";
+import SearchInput, { createFilter } from "react-native-search-filter";
 const emails = [
   {
     name: "Amy Farha",
@@ -97,7 +98,12 @@ class AddFlatMateScreen extends Component {
                   leftAvatar={{ source: { uri: email.avatar_url } }}
                   title={email.name}
                   subtitle={email.subject}
-                  onPress={() => this.props.navigation.navigate("ViewProfile")}
+                  onPress={() =>  this.props.navigation.goBack(null)}
+                  rightIcon={<Icon
+                    raised
+                    name="person-add"
+                    size={30}
+                  />}
                 />
               );
             })}
@@ -105,10 +111,6 @@ class AddFlatMateScreen extends Component {
         </View>
       </View>
     );
-  }
-
-  nextPage() {
-    () => this.props.navigation.navigate("ViewProfile");
   }
 }
 

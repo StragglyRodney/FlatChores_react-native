@@ -14,6 +14,8 @@
     "react-native-collapsible": "^0.13.0",
     "react-native-leaderboard": "^1.0.5",
     "react-native-paper": "^2.0.1",
+    "react-native-parallax-header": "^1.0.6",
+    "react-native-parallax-scroll-view": "^0.21.3",
     "react-native-settings-components": "0.0.1",
     "react-native-vector-icons": "^5.0.0",
     "react-navigation": "git+https://github.com/react-community/react-navigation.git",

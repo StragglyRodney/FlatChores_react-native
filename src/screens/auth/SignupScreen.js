@@ -4,6 +4,9 @@ import { View, Text, StyleSheet, Button, TouchableOpacity } from 'react-native'
 import SignupForm from './AuthComponents/SignupForm'
 // create a component
 class SignupScreen extends Component {
+
+  state = { email: '', password: '', errorMessage: null }
+
   render() {
     return (
       <View style={styles.container}>

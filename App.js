@@ -84,8 +84,8 @@ const AppTab = createMaterialBottomTabNavigator(
       screen: HomeStack,
       navigationOptions: {
         tabBarIcon: <Icon name='people' size={25} />,
-        tabBarLabel: 'Home',
-        tabBarColor: '#1c313a',
+        tabBarLabel: 'Chores',
+        tabBarColor: '#b2ebf2',
         shifting: true
       }
     },
@@ -93,8 +93,8 @@ const AppTab = createMaterialBottomTabNavigator(
       screen: FlatStack,
       navigationOptions: {
         tabBarIcon: <Icon name='weekend' size={25} />,
-        tabBarLabel: 'Flat',
-        tabBarColor: '#3a1c31',
+        tabBarLabel: 'Your Flat',
+        tabBarColor: '#80deea',
         shifting: true
       }
     },
@@ -103,7 +103,7 @@ const AppTab = createMaterialBottomTabNavigator(
       navigationOptions: {
         tabBarIcon: <Icon name='reorder' size={25} />,
         tabBarLabel: 'LeaderBoard',
-        tabBarColor: '#ff0000',
+        tabBarColor: '#4dd0e1',
         shifting: true
       }
     },
@@ -112,7 +112,7 @@ const AppTab = createMaterialBottomTabNavigator(
       navigationOptions: {
         tabBarIcon: <Icon name='account-circle' size={25} />,
         tabBarLabel: 'Settings',
-        tabBarColor: '#313a1c',
+        tabBarColor: '#26c6da',
         shifting: true
       }
     }
@@ -122,6 +122,7 @@ const AppTab = createMaterialBottomTabNavigator(
     barStyle: { backgroundColor: '#1c313a' }
   }
 )
+
 
 export default createSwitchNavigator(
   {

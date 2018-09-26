@@ -3,9 +3,17 @@ import React, { Component } from 'react'
 import { View, Text, StyleSheet, Button, TouchableOpacity } from 'react-native'
 import LoginForm from './AuthComponents/LoginForm'
 import Logo from './AuthComponents/Logo'
+
+
 // create a component
+state = { currentUser: null }
 class LoginScreen extends Component {
+
+
+
+
   render() {
+
     return (
       <View style={styles.container}>
         <Logo />

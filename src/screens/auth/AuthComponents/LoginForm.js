@@ -1,23 +1,37 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native';
 import { withNavigation } from 'react-navigation'
+import Firebase from 'react-native-firebase'
 
 class LoginForm extends React.Component {
+    state = { email: '', password: '', errorMessage: null }
     static navigationOptions = {
         header: { visible: false },
         title: 'Welcome',
     };
+
+    handleLogin = () => {
+        // TODO: Firebase stuff...
+        console.log('handleLogin')
+    }
+
     render() {
         return (
             <View style={styles.container}>
                 <TextInput style={styles.inputBox}
                     placeholder="Email"
                     placeholderTextColor='#ffffff'
+                    autoCapitalize="none"
+                    onChangeText={email => this.setState({ email })}
+                    value={this.state.email}
                 />
                 <TextInput style={styles.inputBox}
                     placeholder="Password"
                     placeholderTextColor='#ffffff'
                     secureTextEntry={true}
+                    autoCapitalize="none"
+                    onChangeText={password => this.setState({ password })}
+                    value={this.state.password}
                 />
                 <TouchableOpacity style={styles.button} onPress={() => this.props.navigation.navigate('App')}>
                     <Text style={styles.buttonText}>{this.props.type}</Text>

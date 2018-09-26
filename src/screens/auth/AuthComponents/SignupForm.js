@@ -16,13 +16,16 @@ export default class SignupForm extends React.Component {
                     placeholder="Email"
                     onChangeText={email => this.setState({ email })}
                     placeholderTextColor='#ffffff'
+                    autoCapitalize="none"
                     value={this.state.email}
+
                 />
                 <TextInput style={styles.inputBox}
                     placeholder="Password"
                     placeholderTextColor='#ffffff'
                     onChangeText={password => this.setState({ password })}
                     secureTextEntry={true}
+                    autoCapitalize="none"
                     value={this.state.password}
                 />
                 <TextInput style={styles.inputBox}
@@ -30,6 +33,7 @@ export default class SignupForm extends React.Component {
                     placeholderTextColor='#ffffff'
                     onChangeText={confirmPassword => this.setState({ confirmPassword })}
                     secureTextEntry={true}
+                    autoCapitalize="none"
                     value={this.state.confirmPassword}
                 />
                 <TouchableOpacity style={styles.button}>

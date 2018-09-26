@@ -1,11 +1,3 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow
- */
-
 import React, { Component } from 'react'
 import { Platform, StyleSheet, Text, View } from 'react-native'
 import {
@@ -32,9 +24,13 @@ import CreateFlatScreen from './src/screens/app/CreateFlatScreen'
 import JoinFlatScreen from './src/screens/app/JoinFlatScreen'
 import ViewProfile from './src/screens/app/ViewProfile'
 import AddFlatMateScreen from './src/screens/app/AddFlatMateScreen'
+import Loading from './src/screens/auth/Loading'
+
+
 
 /* Define the startup (authentication) stack */
 const AuthStack = createStackNavigator({
+  Loading: Loading,
   GetStarted: GetStartedScreen,
   Login: LoginScreen,
   Signup: SignupScreen
@@ -51,7 +47,7 @@ const FlatStack = createStackNavigator({
   CreateFlat: CreateFlatScreen,
   JoinFlat: JoinFlatScreen,
   ViewProfile: ViewProfile,
-  AddFlatMate: AddFlatMateScreen
+  AddFlatMate: AddFlatMateScreen,
 })
 
 const SettingsStack = createStackNavigator({

@@ -6,18 +6,23 @@ import Stepper from "react-native-js-stepper";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import AddFlatMateScreen from "./AddFlatMateScreen";
 
+
+//flatmates here are preloaded with dumby flatmates, the list "flatmates" should include those flatmates who have been added by the 
+//user using the addflatmatescreen, this can be done using redux to avoid using callbacks. (redux can be described as a global state... i think)
 const flatmates = [
   {
     name: "Amy Farha",
     avatar_url:
       "https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg",
-    subject: "Vice President"
+    subject: "Vice President",
+    description:"Hi Im Amy Farha and I like to party hardy"
   },
   {
     name: "Jack Jackson",
     avatar_url:
       "https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg",
-    subject: "Vice Chairman"
+    subject: "Vice Chairman",
+    description: "Hi Im Jack Jackosn and I like to party hardy"
   }
 ];
 
@@ -67,14 +72,14 @@ class CreateFlatScreen extends Component {
         <View style={styles.break} />
 
         <ScrollView>
-          {flatmates.map((l, i) => (
+          {flatmates.map((flatmate, i) => (
             <ListItem
               key={i}
-              leftAvatar={{ source: { uri: l.avatar_url } }}
+              leftAvatar={{ source: { uri: flatmate.avatar_url } }}
               rightIcon={<Icon raised name="arrow-forward" size={30} />}
-              title={l.name}
-              subtitle={l.subtitle}
-              onPress={() => this.props.navigation.navigate("ViewProfile")}
+              title={flatmate.name}
+              subtitle={flatmate.subtitle}
+              onPress={() => this.props.navigation.navigate("ViewProfile", {flatmate})}
             />
           ))}
         </ScrollView>

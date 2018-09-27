@@ -46,7 +46,6 @@ const flatmates = [
   }
 ];
 
-const suggestedFlatmates = [];//updates on user input in searchbar
 const KEYS_TO_FILTERS = ["name", "subject"]; //in this case we filter search by name, but this can be done by email if need be 
 
 class AddFlatMateScreen extends Component {
@@ -136,13 +135,6 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 10,
     margin:20,
-  },
-  yourFlatText: {
-    textAlign: "center", // <-- the magic
-    fontWeight: "bold",
-    fontSize: 20,
-    fontFamily: "Georgia",
-    backgroundColor:"#ffa18a"
   },
   scrollView: {
     bottom: 0

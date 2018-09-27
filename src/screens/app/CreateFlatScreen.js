@@ -1,13 +1,6 @@
 // import liraries
 import React, { Component } from "react";
-import {
-  View,
-  StyleSheet,
-  ScrollView,
-  Text,
-  TouchableOpacity,
-  navigationOptions
-} from "react-native";
+import {View, StyleSheet, ScrollView, Text, TouchableOpacity, TextInputAndroidProperties, navigationOptions, TextInput} from "react-native";
 import { ListItem, Button } from "react-native-elements";
 import Stepper from "react-native-js-stepper";
 import Icon from "react-native-vector-icons/MaterialIcons";
@@ -36,31 +29,23 @@ class CreateFlatScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      //used as a conditional within render to decide which view to return
       page: 1
-    }
-  }
-
-  onClickNext() {
-    const { steps, currentStep } = this.state;
-    this.setState({
-      currentStep: currentStep + 1
-    });
+    };
   }
 
   render() {
-    if(this.state.page == 1){
-      return (this.getViewOne()
-    )
-    }
-    else{
-      return this.getViewTwo()
+    //can return one of two views depedning on what stage there at in the create flat process
+    //to be implemented ---> more conditionals to ensure the user has entered a valid flat name!! important!
+    if (this.state.page == 1) {
+      return this.getViewOne();
+    } else {
+      return this.getViewTwo();
     }
   }
 
-  nextPage() {
-    () => this.props.navigation.navigate("ViewProfile");
-  }
 
+  //FIRST STEP (ADDING FLATMATES)
   getViewOne() {
     return (
       <View style={styles.container}>
@@ -102,11 +87,10 @@ class CreateFlatScreen extends Component {
             showTopStepper={false}
             showBottomStepper={true}
             backButtonTitle="BACK"
-            onPressNext = {() => {
-              
+            onPressNext={() => {
               this.setState({
-                page: 2,
-              })
+                page: 2
+              });
             }}
             nextButtonTitle="NEXT"
             activeStepStyle={styles.activeStep}
@@ -122,32 +106,42 @@ class CreateFlatScreen extends Component {
         </View>
       </View>
     );
-
   }
-  getViewTwo(){
-    return( <View style={styles.container}>
-      <Text>Create Flat Name</Text>
-     
-       <View style={styles.stepper}>
+
+
+  //VIEW FOR STEP NUMBER TWO (CREATE A FLAT NAME)
+  getViewTwo() {
+    return (
+      <View style={styles.container}>
+
+        <View style={styles.title}>
+          <Text style={styles.titleText1}>Create A Flat Name</Text>
+        </View>
+
+        <View style={styles.flatName}>
+
+          <TextInput
+            style={styles.inputBox}
+            placeholder="Flat nickname"
+            placeholderTextColor="#ffffff"
+          />
+
+        </View>
+
+        <View style={styles.stepper}>
           <Stepper
-            
-            initialPage={2}
+            initialPage={1}
             validation={false}
             activeDotStyle={styles.activeDot}
             inactiveDotStyle={styles.inactiveDot}
             showTopStepper={false}
             showBottomStepper={true}
             backButtonTitle="BACK"
-            onPressNext = {() => {
-              this.setState({
-                page: 2
-              })
+            onPressNext={() => {
+              this.createFlat
             }}
-            onPressBack={()=>
-              this.setState({page:1})
-
-            }
-            nextButtonTitle="NEXT"
+            onPressBack={() => this.setState({ page: 1 })}
+            nextButtonTitle="FINISH"
             activeStepStyle={styles.activeStep}
             inactiveStepStyle={styles.inactiveStep}
             activeStepTitleStyle={styles.activeStepTitle}
@@ -159,13 +153,16 @@ class CreateFlatScreen extends Component {
             <View />
           </Stepper>
         </View>
-    </View>
-    
-  );
-  
+      </View>
+    );
+  }
+
+  createFlat() {
+    //CREATE A FLAT AND QUERY THE DATABASE
+    //NAVIGATE TO CHORES PAGE
+    this.props.navigation.navigate('HomeNav')
   }
 }
-
 
 // define your styles
 const styles = StyleSheet.create({
@@ -175,13 +172,6 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     justifyContent: "center",
     alignItems: "stretch"
-  },
-  emailItem: {
-    borderBottomWidth: 0.5,
-    borderColor: "rgba(0,0,0,0.3)"
-  },
-  emailSubject: {
-    color: "rgba(0,0,0,0.5)"
   },
   titleText: {
     textAlign: "left",
@@ -193,6 +183,16 @@ const styles = StyleSheet.create({
     paddingTop: 15,
     paddingLeft: 90
   },
+  titleText1: {
+    textAlign: "center",
+    fontWeight: "bold",
+    fontSize: 25,
+    fontFamily: "Georgia",
+    backgroundColor: "#00c2cc",
+    color: "#ffffff",
+    paddingTop: 15
+  },
+
   title: {
     backgroundColor: "#00c2cc",
     paddingTop: 20,
@@ -217,28 +217,50 @@ const styles = StyleSheet.create({
     height: 30
   },
   activeDot: {
-    backgroundColor: 'grey'
+    backgroundColor: "grey"
   },
   inactiveDot: {
-    backgroundColor: '#ededed'
+    backgroundColor: "#ededed"
   },
   activeStep: {
-    backgroundColor: 'grey'
+    backgroundColor: "grey"
   },
   inactiveStep: {
-    backgroundColor: '#ededed'
+    backgroundColor: "#ededed"
   },
   activeStepTitle: {
-    fontWeight: 'bold'
+    fontWeight: "bold"
   },
   inactiveStepTitle: {
-    fontWeight: 'normal'
+    fontWeight: "normal"
   },
   activeStepNumber: {
-    color: 'white'
+    color: "white"
   },
   inactiveStepNumber: {
-    color: 'black'
+    color: "black"
+  },
+  inputBox: {
+    textAlign: "center",
+    width: 300,
+    backgroundColor: "grey",
+    borderRadius: 10,
+    paddingHorizontal: 16,
+    paddingVertical: 12,
+    fontSize: 16,
+    color: "#ffffff",
+    marginVertical: 6
+  },
+
+  button: {
+    width: 300,
+    backgroundColor: "#ffa18a",
+    borderRadius: 10,
+    paddingVertical: 12,
+    marginVertical: 6
+  },
+  flatName: {
+    alignItems: "center"
   }
 });
 

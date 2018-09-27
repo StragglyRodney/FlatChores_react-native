@@ -32,7 +32,6 @@ import CreateFlatScreen from './src/screens/app/CreateFlatScreen'
 import JoinFlatScreen from './src/screens/app/JoinFlatScreen'
 import ViewProfile from './src/screens/app/ViewProfile'
 import AddFlatMateScreen from './src/screens/app/AddFlatMateScreen'
-
 /* Define the startup (authentication) stack */
 const AuthStack = createStackNavigator({
   GetStarted: GetStartedScreen,

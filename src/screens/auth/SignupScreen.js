@@ -1,19 +1,20 @@
 // import liraries
 import React, { Component } from 'react'
 import { View, Text, StyleSheet, Button, TouchableOpacity } from 'react-native'
-import SignupForm from './AuthComponents/SignupForm'
+import SignupForm from '../../components/SignupForm'
 // create a component
 class SignupScreen extends Component {
-
   state = { email: '', password: '', errorMessage: null }
 
-  render() {
+  render () {
     return (
       <View style={styles.container}>
-        <SignupForm type="Signup" />
+        <SignupForm type='Signup' />
         <View style={styles.signupTextCont}>
           <Text style={styles.signupText}>Already Have an account?</Text>
-          <TouchableOpacity onPress={() => this.props.navigation.navigate('Login')}>
+          <TouchableOpacity
+            onPress={() => this.props.navigation.navigate('Login')}
+          >
             <Text style={styles.signupButton}> Log in!</Text>
           </TouchableOpacity>
         </View>
@@ -39,7 +40,7 @@ const styles = StyleSheet.create({
   },
   signupText: {
     color: 'rgba(255,255,255,0.6)',
-    fontSize: 16,
+    fontSize: 16
   },
   signupButton: {
     color: '#ffffff',

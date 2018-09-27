@@ -12,7 +12,7 @@ import {
 import { createStackNavigator } from 'react-navigation'
 import Icon from 'react-native-vector-icons/MaterialIcons'
 
-import ChoresAccordionView from './components/ChoresAccordionView'
+import ChoresAccordionView from '../../components/ChoresAccordionView'
 
 class HomeScreen extends Component {
   render () {

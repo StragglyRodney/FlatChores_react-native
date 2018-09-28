@@ -22,6 +22,8 @@ DerivedData
 *.xcuserstate
 project.xcworkspace
 
+GoogleService-Info.plist
+
 # Android/IntelliJ
 #
 build/

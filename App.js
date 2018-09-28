@@ -4,6 +4,8 @@ import { AuthStack, AppTab } from './src/lib/Navigators'
 import { firebase, firestore } from 'firebase'
 import { firebaseService } from './src/lib/FireBaseService'
 
+firebaseService.load('test')
+
 export default createSwitchNavigator(
   {
     Auth: AuthStack,

@@ -120,7 +120,7 @@ class CreateFlatScreen extends Component {
       <View style={styles.container}>
 
         <View style={styles.title}>
-          <Text style={styles.titleText1}>Create A Flat Name</Text>
+          <Text style={styles.titleText1}>Create a Flat name</Text>
         </View>
 
         <View style={styles.flatName}>

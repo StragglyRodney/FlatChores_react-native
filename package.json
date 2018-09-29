@@ -7,12 +7,14 @@
     "test": "jest"
   },
   "dependencies": {
+    "firebase": "^5.5.2",
     "giphy-api": "^1.2.7",
     "prop-types": "^15.6.2",
     "react": "16.5.0",
     "react-native": "0.57.0",
     "react-native-collapsible": "^0.13.0",
     "react-native-elements": "^0.19.1",
+    "react-native-firebase": "^5.0.0",
     "react-native-js-stepper": "^0.2.1",
     "react-native-leaderboard": "^1.0.5",
     "react-native-paper": "^2.0.1",

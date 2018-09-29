@@ -1,5 +1,7 @@
 // import liraries
 import React, { Component } from 'react'
+import { firestore } from 'firebase'
+
 import {
   View,
   Text,

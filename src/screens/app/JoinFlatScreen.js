@@ -1,69 +1,110 @@
-import React, { Component } from "react";
-import {View, StyleSheet, ScrollView, Text, TouchableOpacity, TextInputAndroidProperties, navigationOptions, TextInput} from "react-native";
+import React, { Component } from 'react';
+ 
+import {
+  AppRegistry,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  Linking,
+  navigationOptions,
+  View,
+  Image,
+  Button
+} from 'react-native';
 import Icon from "react-native-vector-icons/MaterialIcons";
+import QRCodeScanner from 'react-native-qrcode-scanner';
+import ImagePicker from "react-native-image-picker";
 
-// create a component
+ 
 class JoinFlatScreen extends Component {
+
   static navigationOptions = {
     tabBarIcon: <Icon name="weekend" size={25} />,
     tabBarLabel: "Flat",
     tabBarColor: "#3a1c31",
     shifting: true
   };
+
+  state = {
+    pickedImage: null
+  }
+
+  reset = () => {
+    this.setState({
+      pickedImage: null
+    });
+  }
+
+  /**
+ * The first arg is the options object for customization (it can also be null or omitted for default options),
+ * The second arg is the callback which sends object: response (more info below in README)
+ */
+
+  pickImageHandler = () => {
+    ImagePicker.showImagePicker({title: "Pick an Image", maxWidth: 800, maxHeight: 600}, res => {
+      if (res.didCancel) {
+        console.log("User cancelled!");
+      } else if (res.error) {
+        console.log("Error", res.error);
+      } else {
+        this.setState({
+          pickedImage: { uri: res.uri }
+        });
+
+      }
+    });
+  }
+
+  resetHandler = () =>{
+    this.reset();
+  }
+
   render() {
     return (
       <View style={styles.container}>
-        <View style={styles.title}>
-          <Text style={styles.titleText1}>Join a flat</Text>
+      <Text style={styles.textStyle}>Pick Image From Camera and Gallery </Text>
+        <View style={styles.placeholder}>
+          <Image source={this.state.pickedImage} style={styles.previewImage} />
         </View>
-
-        <View style={styles.flatName}>
-          <TextInput
-            style={styles.inputBox}
-            placeholder="FlatID"
-            placeholderTextColor="#ffffff"
-          />
+        <View style={styles.button}>
+          <Button title="Pick Image" onPress={this.pickImageHandler} />
         </View>
       </View>
     );
   }
 }
 
-
-// define your styles
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "#ffffff",
+    alignItems:"center"
   },
-  titleText1: {
-    textAlign: "center",
-    fontWeight: "bold",
-    fontSize: 25,
-    fontFamily: "Georgia",
-    backgroundColor: "#00c2cc",
-    color: "#ffffff",
+  textStyle: {
+    fontWeight:"bold",
+    fontSize:30,
+    textAlign:"center",
+    color:"red",
+    marginTop:10
   },
-
-  title: {
-    backgroundColor: "#00c2cc",
-    paddingTop: 20,
-    paddingBottom: 20
+  placeholder: {
+    borderWidth: 1,
+    borderColor: "black",
+    backgroundColor: "#eee",
+    width: "70%",
+    height: 280,
+    marginTop:50,
   },
-  inputBox: {
-    textAlign: "center",
-    width: 300,
-    backgroundColor: "grey",
-    borderRadius: 10,
-    paddingHorizontal: 16,
-    paddingVertical: 12,
-    fontSize: 16,
-    color: "#ffffff",
-    marginVertical: 6
+  button: {
+    width: "80%",
+    marginTop:20,
+    flexDirection:"row",
+    justifyContent: "space-around"
   },
-  flatName: {
-    alignItems: "center"
+  previewImage: {
+      width: "100%",
+      height: "100%"
   }
 });
 
-// make this component available to the app
+
 export default JoinFlatScreen;
+

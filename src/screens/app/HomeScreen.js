@@ -20,9 +20,6 @@ class HomeScreen extends Component {
       <ScrollView style={styles.container}>
         <ChoresAccordionView />
         <View style={styles.addChoreCont}>
-          <Text style={styles.addChoreText}>
-            Your flat chores will show up here
-          </Text>
           <Icon
             raised
             name='add-circle'

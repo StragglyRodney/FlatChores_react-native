@@ -4,8 +4,6 @@ import { AuthStack, AppTab } from './src/lib/Navigators'
 import { firebaseService } from './src/lib/FireBaseService'
 import firebase from 'firebase/app'
 
-firebaseService.load('test')
-
 firebase.initializeApp({
   apiKey: 'AIzaSyDhr9S4S4Gshpbb8WsRACyHimXOr0iczY8',
   authDomain: 'flatchores-react-native.firebaseapp.com',

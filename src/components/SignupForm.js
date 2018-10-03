@@ -15,12 +15,14 @@ export default class SignupForm extends React.Component {
                 <TextInput style={styles.inputBox}
                     placeholder="Email"
                     onChangeText={email => this.setState({ email })}
+                    autoCapitalize='none'
                     placeholderTextColor='#ffffff'
                     value={this.state.email}
                 />
                 <TextInput style={styles.inputBox}
                     placeholder="Password"
                     placeholderTextColor='#ffffff'
+                    autoCapitalize='none'
                     onChangeText={password => this.setState({ password })}
                     secureTextEntry={true}
                     value={this.state.password}
@@ -28,6 +30,7 @@ export default class SignupForm extends React.Component {
                 <TextInput style={styles.inputBox}
                     placeholder="Re-enter Password"
                     placeholderTextColor='#ffffff'
+                    autoCapitalize='none'
                     onChangeText={confirmPassword => this.setState({ confirmPassword })}
                     secureTextEntry={true}
                     value={this.state.confirmPassword}

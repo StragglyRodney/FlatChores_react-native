@@ -11,6 +11,10 @@ target 'FlatChores' do
   pod 'Firebase/Database'
   pod 'Firebase/Auth'
 
+  pod 'react-native-image-picker', :path => '../node_modules/react-native-image-picker'
+
+  pod 'RNScreens', :path => '../node_modules/react-native-screens'
+
   target 'FlatChoresTests' do
     inherit! :search_paths
     # Pods for testing

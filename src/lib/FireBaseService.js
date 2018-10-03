@@ -1,7 +1,7 @@
 import firebase from 'react-native-firebase'
 
 class FirebaseService {
-  async createChore (choreTitle, choreDescription) {
+  async createChore(choreTitle, choreDescription) {
     const doc = await firebase
       .firestore()
       .collection('flat1')
@@ -27,7 +27,7 @@ class FirebaseService {
     }
   }
 
-  async fetchChores () {
+  async fetchChores() {
     // var choresRef = await firebase.firestore().collection('flat1').doc('chores')
     // var getDoc = choresRef
     //   .get()

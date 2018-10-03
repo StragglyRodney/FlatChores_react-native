@@ -8,6 +8,7 @@ import {
 } from 'react-native'
 import { withNavigation } from 'react-navigation'
 import firebase from 'firebase'
+import Loader from '../components/Loader';
 
 class LoginForm extends Component {
   state = { email: '', password: '', error: '', loading: false }
@@ -27,7 +28,7 @@ class LoginForm extends Component {
       })
       .catch(() => {
         // Login was not successful, let's create a new account
-        this.setState({ error: 'Authentication failed.', loading: false })
+        this.setState({ error: 'Authentication failed.', loading: true })
       })
   }
 
@@ -36,6 +37,8 @@ class LoginForm extends Component {
   render() {
     return (
       <View style={styles.container}>
+        <Loader
+          loading={this.state.loading} />
         <TextInput
           style={styles.inputBox}
           placeholder='Email'

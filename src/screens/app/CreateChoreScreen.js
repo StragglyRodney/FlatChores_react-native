@@ -37,11 +37,15 @@ class CreateChoreScreen extends Component {
           onChangeText={choreDescription => this.setState({ choreDescription })}
         />
 
-        <Button
-          onPress={this.createChore()}
-          title='Create Chore'
-          color='#ffffff'
-        />
+        <TouchableOpacity
+          onPress={() => {
+            this.createChore()
+            this.props.navigation.goBack()
+          }}
+          style={styles.button}
+        >
+          <Text style={styles.buttonText}>Create Chore</Text>
+        </TouchableOpacity>
       </View>
     )
   }
@@ -58,6 +62,7 @@ const styles = StyleSheet.create({
   container: {
     flexGrow: 1,
     alignItems: 'center',
+    paddingVertical: 30,
     // justifyContent: 'center',
     backgroundColor: '#00c2cc'
   },

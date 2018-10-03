@@ -1,13 +1,34 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native';
+import Loader from '../components/Loader';
+import firebase from 'firebase'
+import { withNavigation } from 'react-navigation'
 
-export default class SignupForm extends React.Component {
+class SignupForm extends React.Component {
 
-    state = { email: '', password: '', confirmPassword: '', errorMessage: null }
+    state = { email: '', password: '', confirmPassword: '', errorMessage: null, loading: false }
+
+    onSignUpPress() {
+        this.setState({ error: '', loading: true })
+        const { email, password } = this.state
+
+        firebase.auth().createUserWithEmailAndPassword(email, password)
+            .then(() => {
+                this.setState({ error: '', loading: false })
+                this.props.navigation.goBack()
+            })
+            .catch(() => {
+                // Login was not successful, let's create a new account
+                this.setState({ error: 'Signup failed.', loading: false })
+            })
+
+    }
 
     render() {
         return (
             <View style={styles.container}>
+                <Loader
+                    loading={this.state.loading} />
                 <TextInput style={styles.inputBox}
                     placeholder="Name"
                     placeholderTextColor='#ffffff'
@@ -35,7 +56,9 @@ export default class SignupForm extends React.Component {
                     secureTextEntry={true}
                     value={this.state.confirmPassword}
                 />
-                <TouchableOpacity style={styles.button}>
+                <TouchableOpacity onPress={this.onSignUpPress.bind(this)}
+                    style={styles.button}
+                >
                     <Text style={styles.buttonText}>{this.props.type}</Text>
                 </TouchableOpacity>
             </View>
@@ -80,3 +103,5 @@ const styles = StyleSheet.create({
     },
 
 });
+
+export default withNavigation(SignupForm)

@@ -5,47 +5,54 @@ import { ListItem, Button } from "react-native-elements";
 
 import Icon from "react-native-vector-icons/MaterialIcons";
 import SearchInput, { createFilter } from "react-native-search-filter";
-const emails = [
+
+//
+const flatmates = [
   {
     name: "Amy Farha",
     avatar_url:
       "https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg",
-    subject: "Vice President"
+    subject: "Vice President",
+    description:"insert description here"
   },
   {
     name: "Jack Jackson",
     avatar_url:
       "https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg",
-    subject: "Vice Chairman"
+    subject: "Vice Chairman",
+    description:"insert description here"
   },
   {
     name: "Ben Rickman",
     avatar_url:
       "https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg",
-    subject: "Vice Chairman"
+    subject: "Vice Chairman",
+    description:"insert description here"
   },
   {
     name: "Angela Roskam",
     avatar_url:
       "https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg",
-    subject: "Vice Chairman"
+    subject: "Vice Chairman",
+    description:"insert description here"
   },
   {
     name: "Ben Rickman",
     avatar_url:
       "https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg",
-    subject: "Vice Chairman"
+    subject: "Vice Chairman",
+    description:"insert description here"
   },
   {
     name: "Angela Roskam",
     avatar_url:
       "https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg",
-    subject: "Vice Chairman"
+    subject: "Vice Chairman",
+    description:"insert description here"
   }
 ];
 
-const suggestedFlatmates = [];//updates on user input in searchbar
-const KEYS_TO_FILTERS = ["name", "subject"]; //in this case we filter search by name, but this can chnage to email if need be 
+const KEYS_TO_FILTERS = ["name", "subject"]; //in this case we filter search by name, but this can be done by email if need be 
 
 class AddFlatMateScreen extends Component {
   
@@ -56,15 +63,8 @@ class AddFlatMateScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      searchTerm: ""
+      searchTerm: ""//nothing to search yet
     };
-  }
-
-  onClickNext() {
-    const { steps, currentStep } = this.state;
-    this.setState({
-      currentStep: currentStep + 1
-    });
   }
 
   searchUpdated(term) {
@@ -72,26 +72,33 @@ class AddFlatMateScreen extends Component {
   }
 
   render() {
-    filteredEmails = emails.filter(
-      createFilter(this.state.searchTerm, KEYS_TO_FILTERS)
-    );
-    filteredEmails = filteredEmails.slice(0, 3);
+    filteredflatmates=[]//create and empty filtered list
+    
+    //if search is empty, dont update filtered list
     if (this.state.searchTerm.length == 0) {
-      filteredEmails = [];
+      filteredflatmates = [];
+    }
+    else{
+      //update filtered list
+      filteredflatmates = flatmates.filter(
+        createFilter(this.state.searchTerm, KEYS_TO_FILTERS)
+      );
+      //only display the top 3 filteredfltmates (can be changed if need be)
+      filteredflatmates = filteredflatmates.slice(0, 3);
     }
     return (
       <View style={styles.container}>
         <SearchInput
           style={styles.container}
           onChangeText={term => {
-            this.searchUpdated(term);
+            this.searchUpdated(term);//on user input update the search "term"
           }}
           style={styles.searchInput}
           placeholder="Search for your flatmates!!"
         />
         <View style={styles.scrollView}>
           <ScrollView>
-            {filteredEmails.map(email => {
+            {filteredflatmates.map(email => {
               return (
                 <ListItem
                   key={email.id}
@@ -123,7 +130,7 @@ const styles = StyleSheet.create({
     borderBottomWidth: 0.5,
     borderColor: "rgba(0,0,0,0.3)"
   },
-  emailSubject: {
+  flatmatesubject: {
     color: "rgba(0,0,0,0.5)"
   },
   searchInput: {
@@ -134,13 +141,6 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 10,
     margin:20,
-  },
-  yourFlatText: {
-    textAlign: "center", // <-- the magic
-    fontWeight: "bold",
-    fontSize: 20,
-    fontFamily: "Georgia",
-    backgroundColor:"#ffa18a"
   },
   scrollView: {
     bottom: 0

@@ -9,19 +9,31 @@ import {
   TouchableOpacity
 } from 'react-native';
 // create a component
+
 class ViewProfile extends Component {
+
+  
+  constructor(props) {
+    super(props);
+    this.state = {
+      //passed in as a parameter is a flatmate conisting of "avatar_url, name, suject, and description"
+      flatmate:this.props.navigation.state.params.flatmate
+    };
+  }
+
+
   render () {
     return (
       <View style={styles.container}>
           <View style={styles.header}></View>
-          <Image style={styles.avatar} source={{uri: 'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg'}}/>
+          <Image style={styles.avatar} source={{uri: this.state.flatmate.avatar_url}}/>
           <View style={styles.body}>
             <View style={styles.bodyContent}>
-              <Text style={styles.name}>John Doe</Text>
-              <Text style={styles.info}>UX Designer / Mobile developer</Text>
-              <Text style={styles.description}>Lorem ipsum dolor sit amet, saepe sapientem eu nam. Qui ne assum electram expetendis, omittam deseruisse consequuntur ius an,</Text>
+              <Text style={styles.name}>{this.state.flatmate.name}</Text>
+              <Text style={styles.info}>{this.state.flatmate.subject}</Text>
+              <Text style={styles.description}>{this.state.flatmate.description}</Text>
               
-              <TouchableOpacity style={styles.buttonContainer}>
+              <TouchableOpacity style={styles.buttonContainer} onPress={this.removeFlatmate}>
                 <Text>Remove Flatmate</Text>  
               </TouchableOpacity>       
             </View>
@@ -29,6 +41,10 @@ class ViewProfile extends Component {
       </View>
     )
   }
+removeFlatmate(){
+  //remove flatmate here, through the database? or json file? depending on where the clicked view profile from..
+}
+
 }
 const styles = StyleSheet.create({
   header:{

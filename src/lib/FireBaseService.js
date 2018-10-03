@@ -1,19 +1,26 @@
 import firebase from 'react-native-firebase'
 
 class FirebaseService {
-  constructor () {
-    this.ref = firebase.firestore().collection('people')
-  }
-  async load (id) {
-    const doc = await this.ref.doc(id).get()
+  async createChore (choreTitle, choreDescription) {
+    const doc = await firebase
+      .firestore()
+      .collection('chores')
+      .doc(choreTitle)
+      .get()
+
     if (doc.exists) {
       return doc.data()
     } else {
       const defaultDoc = {
-        name: 'ABC',
-        age: 2
+        choreTitle: choreTitle,
+        choreDescription: choreDescription
       }
-      await this.ref.doc(id).set(defaultDoc)
+      await firebase
+        .firestore()
+        .collection('chores')
+        .doc(choreTitle)
+        .set(defaultDoc)
+
       return doc
     }
   }

@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   Button
 } from 'react-native'
+import { firebaseService } from '../../lib/FireBaseService'
 
 class CreateChoreScreen extends Component {
   constructor (props) {
@@ -17,8 +18,6 @@ class CreateChoreScreen extends Component {
       choreDueDate: new Date() + 7
     }
   }
-
-  createChore () {}
 
   render () {
     return (
@@ -44,6 +43,13 @@ class CreateChoreScreen extends Component {
           color='#ffffff'
         />
       </View>
+    )
+  }
+
+  createChore () {
+    firebaseService.createChore(
+      this.state.choreTitle,
+      this.state.choreDescription
     )
   }
 }

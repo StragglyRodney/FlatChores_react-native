@@ -12,7 +12,7 @@ import {
 import { createStackNavigator } from 'react-navigation'
 import Icon from 'react-native-vector-icons/MaterialIcons'
 
-import ChoresAccordionView from './components/ChoresAccordionView'
+import ChoresAccordionView from '../../components/ChoresAccordionView'
 
 class HomeScreen extends Component {
   render () {
@@ -20,9 +20,6 @@ class HomeScreen extends Component {
       <ScrollView style={styles.container}>
         <ChoresAccordionView />
         <View style={styles.addChoreCont}>
-          <Text style={styles.addChoreText}>
-            Your flat chores will show up here
-          </Text>
           <Icon
             raised
             name='add-circle'

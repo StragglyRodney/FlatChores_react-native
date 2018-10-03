@@ -1,11 +1,3 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow
- */
-
 import React, { Component } from 'react'
 import { Platform, StyleSheet, Text, View } from 'react-native'
 import {
@@ -32,6 +24,20 @@ import CreateFlatScreen from './src/screens/app/CreateFlatScreen'
 import JoinFlatScreen from './src/screens/app/JoinFlatScreen'
 import ViewProfile from './src/screens/app/ViewProfile'
 import AddFlatMateScreen from './src/screens/app/AddFlatMateScreen'
+import { createSwitchNavigator } from 'react-navigation'
+import { AuthStack, AppTab } from './src/lib/Navigators'
+import { firebaseService } from './src/lib/FireBaseService'
+import firebase from 'firebase/app'
+
+firebase.initializeApp({
+  apiKey: 'AIzaSyDhr9S4S4Gshpbb8WsRACyHimXOr0iczY8',
+  authDomain: 'flatchores-react-native.firebaseapp.com',
+  databaseURL: 'https://flatchores-react-native.firebaseio.com',
+  projectId: 'flatchores-react-native',
+  storageBucket: 'flatchores-react-native.appspot.com',
+  messagingSenderId: '415430905460'
+})
+
 /* Define the startup (authentication) stack */
 const AuthStack = createStackNavigator({
   GetStarted: GetStartedScreen,
@@ -43,82 +49,6 @@ const AuthStack = createStackNavigator({
 const HomeStack = createStackNavigator({
   HomeNav: HomeScreen,
   CreateChore: CreateChoreScreen
-})
-
-const FlatStack = createStackNavigator({
-  Flat: FlatScreen,
-  CreateFlat: CreateFlatScreen,
-  JoinFlat: JoinFlatScreen,
-  ViewProfile: ViewProfile,
-  AddFlatMate: AddFlatMateScreen
-})
-
-const SettingsStack = createStackNavigator({
-  SettingsNav: SettingsScreen,
-  Notifications: NotificationsScreen,
-  Profile: ProfileScreen
-})
-
-const LeaderBoardStack = createStackNavigator({
-  LeaderBoard: LeaderBoardScreen
-})
-
-/* Hides the tabBar if not on the main tab screen.
-Applied to all the stacks within the tab navigator */
-const hideTabBar = ({ navigation }) => {
-  let tabBarVisible = true
-  if (navigation.state.index > 0) tabBarVisible = false
-  return { tabBarVisible }
-}
-HomeStack.navigationOptions = hideTabBar
-FlatStack.navigationOptions = hideTabBar
-SettingsStack.navigationOptions = hideTabBar
-
-/* Defines the tab navigator and the options for each tab */
-const AppTab = createMaterialBottomTabNavigator(
-  {
-    Home: {
-      screen: HomeStack,
-      navigationOptions: {
-        tabBarIcon: <Icon name='people' size={25} />,
-        tabBarLabel: 'Chores',
-        tabBarColor: '#b2ebf2',
-        shifting: true
-      }
-    },
-    Flat: {
-      screen: FlatStack,
-      navigationOptions: {
-        tabBarIcon: <Icon name='weekend' size={25} />,
-        tabBarLabel: 'Your Flat',
-        tabBarColor: '#80deea',
-        shifting: true
-      }
-    },
-    LeaderBoard: {
-      screen: LeaderBoardStack,
-      navigationOptions: {
-        tabBarIcon: <Icon name='reorder' size={25} />,
-        tabBarLabel: 'LeaderBoard',
-        tabBarColor: '#4dd0e1',
-        shifting: true
-      }
-    },
-    Settings: {
-      screen: SettingsStack,
-      navigationOptions: {
-        tabBarIcon: <Icon name='account-circle' size={25} />,
-        tabBarLabel: 'Settings',
-        tabBarColor: '#26c6da',
-        shifting: true
-      }
-    }
-  },
-  {
-    initialRouteName: 'Home',
-    barStyle: { backgroundColor: '#1c313a' }
-  }
-)
 
 
 export default createSwitchNavigator(

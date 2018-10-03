@@ -7,7 +7,7 @@ import {
   TouchableOpacity,
   Button
 } from 'react-native'
-import { firebaseService } from '../../lib/FireBaseService'
+import { firebaseService } from '../../lib/FirebaseService'
 
 class CreateChoreScreen extends Component {
   constructor (props) {
@@ -38,18 +38,15 @@ class CreateChoreScreen extends Component {
         />
 
         <Button
-          onPress={this.createChore()}
+          onPress={() => {
+            firebaseService
+              .createChore(this.state.choreTitle, this.state.choreDescription)
+              .then(this.props.navigation.goBack())
+          }}
           title='Create Chore'
           color='#ffffff'
         />
       </View>
-    )
-  }
-
-  createChore () {
-    firebaseService.createChore(
-      this.state.choreTitle,
-      this.state.choreDescription
     )
   }
 }

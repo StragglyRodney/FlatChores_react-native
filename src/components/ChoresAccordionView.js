@@ -2,25 +2,28 @@ import React, { Component } from 'react'
 import { View, Text, StyleSheet } from 'react-native'
 import Collapsible from 'react-native-collapsible'
 import Accordion from 'react-native-collapsible/Accordion'
+import { firebaseService } from '../lib/FirebaseService'
 
-const SECTIONS = [
-  {
-    title: 'Dishes',
-    content: 'Clean them'
-  },
-  {
-    title: 'Rubbish',
-    content: 'Take it out'
-  },
-  {
-    title: 'Lawns',
-    content: 'Mow the lawns please'
-  },
-  {
-    title: 'Vacuum',
-    content: 'Vaccum the floor asap'
-  }
-]
+// const SECTIONS = [
+//   {
+//     title: 'Dishes',
+//     content: 'Clean them'
+//   },
+//   {
+//     title: 'Rubbish',
+//     content: 'Take it out'
+//   },
+//   {
+//     title: 'Lawns',
+//     content: 'Mow the lawns please'
+//   },
+//   {
+//     title: 'Vacuum',
+//     content: 'Vaccum the floor asap'
+//   }
+// ]
+
+const SECTIONS = firebaseService.fetchChores()
 
 class ChoresAccordionView extends Component {
   _renderHeader (section) {

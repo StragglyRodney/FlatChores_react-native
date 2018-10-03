@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
- 
+import React, { Component } from 'react'
+
 import {
   AppRegistry,
   StyleSheet,
@@ -10,20 +10,18 @@ import {
   View,
   Image,
   Button
-} from 'react-native';
-import Icon from "react-native-vector-icons/MaterialIcons";
-import QRCodeScanner from 'react-native-qrcode-scanner';
-import ImagePicker from "react-native-image-picker";
+} from 'react-native'
+import Icon from 'react-native-vector-icons/MaterialIcons'
+import QRCodeScanner from 'react-native-qrcode-scanner'
+import ImagePicker from 'react-native-image-picker'
 
- 
 class JoinFlatScreen extends Component {
-
   static navigationOptions = {
-    tabBarIcon: <Icon name="weekend" size={25} />,
-    tabBarLabel: "Flat",
-    tabBarColor: "#3a1c31",
+    tabBarIcon: <Icon name='weekend' size={25} />,
+    tabBarLabel: 'Flat',
+    tabBarColor: '#3a1c31',
     shifting: true
-  };
+  }
 
   state = {
     pickedImage: null
@@ -32,7 +30,7 @@ class JoinFlatScreen extends Component {
   reset = () => {
     this.setState({
       pickedImage: null
-    });
+    })
   }
 
   /**
@@ -41,70 +39,72 @@ class JoinFlatScreen extends Component {
  */
 
   pickImageHandler = () => {
-    ImagePicker.showImagePicker({title: "Pick an Image", maxWidth: 800, maxHeight: 600}, res => {
-      if (res.didCancel) {
-        console.log("User cancelled!");
-      } else if (res.error) {
-        console.log("Error", res.error);
-      } else {
-        this.setState({
-          pickedImage: { uri: res.uri }
-        });
-
+    ImagePicker.showImagePicker(
+      { title: 'Pick an Image', maxWidth: 800, maxHeight: 600 },
+      res => {
+        if (res.didCancel) {
+          console.log('User cancelled!')
+        } else if (res.error) {
+          console.log('Error', res.error)
+        } else {
+          this.setState({
+            pickedImage: { uri: res.uri }
+          })
+        }
       }
-    });
+    )
   }
 
-  resetHandler = () =>{
-    this.reset();
+  resetHandler = () => {
+    this.reset()
   }
 
-  render() {
+  render () {
     return (
       <View style={styles.container}>
-      <Text style={styles.textStyle}>Pick Image From Camera and Gallery </Text>
+        <Text style={styles.textStyle}>
+          Pick Image From Camera and Gallery{' '}
+        </Text>
         <View style={styles.placeholder}>
           <Image source={this.state.pickedImage} style={styles.previewImage} />
         </View>
         <View style={styles.button}>
-          <Button title="Pick Image" onPress={this.pickImageHandler} />
+          <Button title='Pick Image' onPress={this.pickImageHandler} />
         </View>
       </View>
-    );
+    )
   }
 }
 
 const styles = StyleSheet.create({
   container: {
-    alignItems:"center"
+    alignItems: 'center'
   },
   textStyle: {
-    fontWeight:"bold",
-    fontSize:30,
-    textAlign:"center",
-    color:"red",
-    marginTop:10
+    fontWeight: 'bold',
+    fontSize: 30,
+    textAlign: 'center',
+    color: 'red',
+    marginTop: 10
   },
   placeholder: {
     borderWidth: 1,
-    borderColor: "black",
-    backgroundColor: "#eee",
-    width: "70%",
+    borderColor: 'black',
+    backgroundColor: '#eee',
+    width: '70%',
     height: 280,
-    marginTop:50,
+    marginTop: 50
   },
   button: {
-    width: "80%",
-    marginTop:20,
-    flexDirection:"row",
-    justifyContent: "space-around"
+    width: '80%',
+    marginTop: 20,
+    flexDirection: 'row',
+    justifyContent: 'space-around'
   },
   previewImage: {
-      width: "100%",
-      height: "100%"
+    width: '100%',
+    height: '100%'
   }
-});
+})
 
-
-export default JoinFlatScreen;
-
+export default JoinFlatScreen

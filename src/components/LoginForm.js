@@ -10,38 +10,30 @@ import { withNavigation } from 'react-navigation'
 import firebase from 'firebase'
 
 class LoginForm extends Component {
-  state = { email: '', password: '' }
+  state = { email: '', password: '', error: '', loading: false }
   static navigationOptions = {
     header: { visible: false },
     title: 'Welcome'
   }
 
-  onLoginPress () {
+  onLoginPress() {
     this.setState({ error: '', loading: true })
 
     const { email, password } = this.state
-    firebase
-      .auth()
-      .signInWithEmailAndPassword(email, password)
+    firebase.auth().signInWithEmailAndPassword(email, password)
       .then(() => {
         this.setState({ error: '', loading: false })
         this.props.navigation.navigate('App')
       })
       .catch(() => {
         // Login was not successful, let's create a new account
-        firebase
-          .auth()
-          .createUserWithEmailAndPassword(email, password)
-          .then(() => {
-            this.setState({ error: '', loading: false })
-          })
-          .catch(() => {
-            this.setState({ error: 'Authentication failed.', loading: false })
-          })
+        this.setState({ error: 'Authentication failed.', loading: false })
       })
   }
 
-  render () {
+
+
+  render() {
     return (
       <View style={styles.container}>
         <TextInput

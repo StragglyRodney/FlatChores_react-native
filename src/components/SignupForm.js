@@ -1,15 +1,18 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native';
+import firebase from 'firebase'
+import { withNavigation } from 'react-navigation'
 
-export default class SignupForm extends React.Component {
+class SignupForm extends React.Component {
 
-    state = { email: '', password: '', confirmPassword: '', errorMessage: null }
+    state = { name: '', email: '', password: '', confirmPassword: '', errorMessage: null }
 
     render() {
         return (
             <View style={styles.container}>
                 <TextInput style={styles.inputBox}
                     placeholder="Name"
+                    onChangeText={name => this.setState({ name })}
                     placeholderTextColor='#ffffff'
                 />
                 <TextInput style={styles.inputBox}
@@ -32,11 +35,30 @@ export default class SignupForm extends React.Component {
                     secureTextEntry={true}
                     value={this.state.confirmPassword}
                 />
-                <TouchableOpacity style={styles.button}>
+                <TouchableOpacity onPress={this.onSignUpPress.bind(this)}
+                    style={styles.button}
+                >
                     <Text style={styles.buttonText}>{this.props.type}</Text>
                 </TouchableOpacity>
             </View>
         )
+    }
+
+
+    onSignUpPress() {
+        this.setState({ error: '', loading: true })
+
+        const { email, password } = this.state
+        firebase.auth().createUserWithEmailAndPassword(email, password)
+            .then(() => {
+                this.setState({ error: '', loading: false })
+                this.props.navigation.goBack()
+            })
+            .catch(() => {
+                // Login was not successful, let's create a new account
+                this.setState({ error: 'Signup failed.', loading: false })
+            })
+
     }
 }
 
@@ -77,3 +99,5 @@ const styles = StyleSheet.create({
     },
 
 });
+
+export default withNavigation(SignupForm)

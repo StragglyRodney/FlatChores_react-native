@@ -5,7 +5,9 @@ import LoginForm from '../../components/LoginForm'
 import Logo from '../../components/Logo'
 // create a component
 class LoginScreen extends Component {
-  render () {
+  static navigationOptions = { header: null }
+
+  render() {
     return (
       <View style={styles.container}>
         <Logo />

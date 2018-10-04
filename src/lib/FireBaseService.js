@@ -1,7 +1,7 @@
 import firebase from 'react-native-firebase'
 
 class FirebaseService {
-  async createChore (choreTitle, choreDescription) {
+  async createChore(choreTitle, choreDescription) {
     const doc = await firebase
       .firestore()
       .collection('flats')

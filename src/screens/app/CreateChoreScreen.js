@@ -1,14 +1,6 @@
 import React, { Component } from 'react'
-import {
-  View,
-  Text,
-  TextInput,
-  StyleSheet,
-  TouchableOpacity,
-  Button
-} from 'react-native'
+import { View, Text, TextInput, StyleSheet, Button } from 'react-native'
 import firebaseService from '../../lib/FirebaseService'
-import ChoresAccordionView from '../../components/ChoresAccordionView'
 
 class CreateChoreScreen extends Component {
   constructor (props) {
@@ -42,7 +34,10 @@ class CreateChoreScreen extends Component {
           onPress={() => {
             firebaseService
               .createChore(this.state.choreTitle, this.state.choreDescription)
-              .then(this.props.navigation.goBack())
+              .then(() => {
+                this.props.navigation.state.params.onNavigateBack()
+                this.props.navigation.goBack()
+              })
           }}
           title='Create Chore'
           color='#ffffff'
@@ -56,7 +51,6 @@ const styles = StyleSheet.create({
   container: {
     flexGrow: 1,
     alignItems: 'center',
-    // justifyContent: 'center',
     backgroundColor: '#00c2cc'
   },
 

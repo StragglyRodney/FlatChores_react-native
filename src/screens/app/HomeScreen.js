@@ -9,16 +9,57 @@ import {
   ScrollView
 } from 'react-native'
 
-import { createStackNavigator } from 'react-navigation'
+import firebase from 'react-native-firebase'
 import Icon from 'react-native-vector-icons/MaterialIcons'
-
 import ChoresAccordionView from '../../components/ChoresAccordionView'
 
 class HomeScreen extends Component {
+  constructor (props) {
+    super(props)
+    this.state = { accordion_chores: [] }
+  }
+
+  handleOnNavigateBack = () => {
+    this.refreshChores()
+  }
+
+  componentWillMount () {
+    this.refreshChores()
+  }
+
+  refreshChores () {
+    firebase
+      .firestore()
+      .collection('flats')
+      .doc('flat1')
+      .collection('chores')
+      .get()
+      .then(snapshot => {
+        // reset the chores
+        this.setState(() => {
+          return { accordion_chores: [] }
+        })
+
+        // pull all the chores from firestore
+        chores = []
+        snapshot.forEach(chore => {
+          chores.push({
+            title: chore.get('choreTitle'),
+            content: chore.get('choreDescription')
+          })
+        })
+
+        // set state variable to these chores
+        this.setState(() => {
+          return { accordion_chores: chores }
+        })
+      })
+  }
+
   render () {
     return (
       <ScrollView style={styles.container}>
-        <ChoresAccordionView />
+        <ChoresAccordionView sections={this.state.accordion_chores} />
         <View style={styles.addChoreCont}>
           <Icon
             raised
@@ -26,7 +67,10 @@ class HomeScreen extends Component {
             size={40}
             type='font-awesome'
             color='#ffa18a'
-            onPress={() => this.props.navigation.navigate('CreateChore')}
+            onPress={() =>
+              this.props.navigation.navigate('CreateChore', {
+                onNavigateBack: this.handleOnNavigateBack
+              })}
           />
         </View>
       </ScrollView>

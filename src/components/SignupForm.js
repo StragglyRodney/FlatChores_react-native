@@ -3,6 +3,7 @@ import { StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-nativ
 import Loader from '../components/Loader';
 import firebase from 'firebase'
 import { withNavigation } from 'react-navigation'
+import Toast, { DURATION } from 'react-native-easy-toast'
 
 class SignupForm extends React.Component {
 
@@ -20,6 +21,7 @@ class SignupForm extends React.Component {
             .catch(() => {
                 // Login was not successful, let's create a new account
                 this.setState({ error: 'Signup failed.', loading: false })
+                this.refs.toast.show('Sign up failed.', 2000);
             })
 
     }
@@ -61,7 +63,16 @@ class SignupForm extends React.Component {
                 >
                     <Text style={styles.buttonText}>{this.props.type}</Text>
                 </TouchableOpacity>
-            </View>
+                <Toast ref="toast"
+                    style={{ backgroundColor: '#595959' }}
+                    position='top'
+                    positionValue={220}
+                    fadeInDuration={50}
+                    fadeOutDuration={300}
+                    opacity={1}
+                    textStyle={{ color: 'white' }} />
+
+            </View >
         )
     }
 }

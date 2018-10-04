@@ -1,12 +1,14 @@
 // import liraries
 import React, { Component } from 'react'
-import { View, Text, StyleSheet, Button, TouchableOpacity } from 'react-native'
+import { View, Text, StyleSheet, Button, TouchableOpacity, navigationOptions } from 'react-native'
 import SignupForm from '../../components/SignupForm'
+
 // create a component
 class SignupScreen extends Component {
-  state = { email: '', password: '', errorMessage: null }
 
-  render () {
+
+  state = { email: '', password: '', errorMessage: null, loading: false }
+  render() {
     return (
       <View style={styles.container}>
         <SignupForm type='Signup' />

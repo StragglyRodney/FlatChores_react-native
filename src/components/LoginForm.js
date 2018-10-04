@@ -4,11 +4,13 @@ import {
   Text,
   View,
   TextInput,
-  TouchableOpacity
+  TouchableOpacity,
+  navigationOptions
 } from 'react-native'
 import { withNavigation } from 'react-navigation'
 import firebase from 'firebase'
 import Loader from '../components/Loader';
+import Toast, { DURATION } from 'react-native-easy-toast'
 
 class LoginForm extends Component {
   state = { email: '', password: '', error: '', loading: false }
@@ -19,7 +21,6 @@ class LoginForm extends Component {
 
   onLoginPress() {
     this.setState({ error: '', loading: true })
-
     const { email, password } = this.state
     firebase.auth().signInWithEmailAndPassword(email, password)
       .then(() => {
@@ -28,7 +29,8 @@ class LoginForm extends Component {
       })
       .catch(() => {
         // Login was not successful, let's create a new account
-        this.setState({ error: 'Authentication failed.', loading: true })
+        this.setState({ error: 'Authentication failed.', loading: false })
+        this.refs.toast.show('Authentication failed.', 2000);
       })
   }
 
@@ -62,6 +64,14 @@ class LoginForm extends Component {
         >
           <Text style={styles.buttonText}>{this.props.type}</Text>
         </TouchableOpacity>
+        <Toast ref="toast"
+          style={{ backgroundColor: '#595959' }}
+          position='top'
+          positionValue={220}
+          fadeInDuration={50}
+          fadeOutDuration={300}
+          opacity={1}
+          textStyle={{ color: 'white' }} />
       </View>
     )
   }

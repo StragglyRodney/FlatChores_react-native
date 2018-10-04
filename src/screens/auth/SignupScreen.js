@@ -3,8 +3,11 @@ import React, { Component } from 'react'
 import { View, Text, StyleSheet, Button, TouchableOpacity, navigationOptions } from 'react-native'
 import SignupForm from '../../components/SignupForm'
 
+
+
 // create a component
 class SignupScreen extends Component {
+
 
 
   state = { email: '', password: '', errorMessage: null, loading: false }

@@ -7,7 +7,8 @@ import {
   TouchableOpacity,
   Button
 } from 'react-native'
-import { firebaseService } from '../../lib/FirebaseService'
+import firebaseService from '../../lib/FirebaseService'
+import ChoresAccordionView from '../../components/ChoresAccordionView'
 
 class CreateChoreScreen extends Component {
   constructor (props) {

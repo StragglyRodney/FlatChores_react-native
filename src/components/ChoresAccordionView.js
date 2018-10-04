@@ -2,28 +2,10 @@ import React, { Component } from 'react'
 import { View, Text, StyleSheet } from 'react-native'
 import Collapsible from 'react-native-collapsible'
 import Accordion from 'react-native-collapsible/Accordion'
-import { firebaseService } from '../lib/FirebaseService'
+import firebase from 'react-native-firebase'
+import { withNavigationFocus } from 'react-navigation'
 
-// const SECTIONS = [
-//   {
-//     title: 'Dishes',
-//     content: 'Clean them'
-//   },
-//   {
-//     title: 'Rubbish',
-//     content: 'Take it out'
-//   },
-//   {
-//     title: 'Lawns',
-//     content: 'Mow the lawns please'
-//   },
-//   {
-//     title: 'Vacuum',
-//     content: 'Vaccum the floor asap'
-//   }
-// ]
-
-const SECTIONS = firebaseService.fetchChores()
+SECTIONS = []
 
 class ChoresAccordionView extends Component {
   _renderHeader (section) {
@@ -42,7 +24,26 @@ class ChoresAccordionView extends Component {
     )
   }
 
+  _fetchData () {
+    firebase
+      .firestore()
+      .collection('flats')
+      .doc('flat1')
+      .collection('chores')
+      .get()
+      .then(snapshot => {
+        SECTIONS = []
+        snapshot.forEach(chore => {
+          SECTIONS.push({
+            title: chore.get('choreTitle'),
+            content: chore.get('choreDescription')
+          })
+        })
+      })
+  }
+
   render () {
+    console.log('RENDERED')
     return (
       <Accordion
         sections={SECTIONS}

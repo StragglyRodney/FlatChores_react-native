@@ -18,7 +18,7 @@ class HomeScreen extends Component {
   render () {
     return (
       <ScrollView style={styles.container}>
-
+        <ChoresAccordionView />
         <View style={styles.addChoreCont}>
           <Icon
             raised

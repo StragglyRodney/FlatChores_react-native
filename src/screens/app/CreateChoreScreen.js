@@ -9,6 +9,7 @@ import {
 } from 'react-native'
 import firebase from 'react-native-firebase'
 import Loader from '../../components/Loader'
+import Toast, { DURATION } from 'react-native-easy-toast'
 
 class CreateChoreScreen extends Component {
   constructor (props) {
@@ -17,6 +18,7 @@ class CreateChoreScreen extends Component {
       choreTitle: '',
       choreDescription: '',
       choreDueDate: new Date() + 7,
+      error: '',
       loading: false
     }
   }
@@ -30,10 +32,11 @@ class CreateChoreScreen extends Component {
       .collection('chores')
       .doc(choreTitle)
 
-    const doc = chore.get()
+    const doc = await chore.get()
 
     if (doc.exists) {
-      return doc.data()
+      console.log('Chore already exists')
+      throw 'Chore already exists'
     } else {
       const defaultDoc = {
         choreTitle: choreTitle,
@@ -66,19 +69,35 @@ class CreateChoreScreen extends Component {
 
         <TouchableOpacity
           onPress={() => {
-            this.createChore(
-              this.state.choreTitle,
-              this.state.choreDescription
-            ).then(() => {
-              this.setState({ error: '', loading: false })
-              this.props.navigation.state.params.onNavigateBack()
-              this.props.navigation.goBack()
-            })
+            this.createChore(this.state.choreTitle, this.state.choreDescription)
+              .then(() => {
+                this.setState({ error: '', loading: false })
+                this.props.navigation.state.params.onNavigateBack()
+                this.props.navigation.goBack()
+              })
+              .catch(error => {
+                console.log('Did get caught')
+                this.setState({
+                  error: error,
+                  loading: false
+                })
+                this.refs.toast.show(error, 2000)
+              })
           }}
           style={styles.button}
         >
           <Text style={styles.buttonText}>{'Create Chore'}</Text>
         </TouchableOpacity>
+        <Toast
+          ref='toast'
+          style={{ backgroundColor: '#595959' }}
+          position='top'
+          positionValue={220}
+          fadeInDuration={50}
+          fadeOutDuration={300}
+          opacity={1}
+          textStyle={{ color: 'white' }}
+        />
       </View>
     )
   }

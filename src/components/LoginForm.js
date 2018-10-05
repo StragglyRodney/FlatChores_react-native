@@ -9,7 +9,7 @@ import {
 } from 'react-native'
 import { withNavigation } from 'react-navigation'
 import firebase from 'firebase'
-import Loader from '../components/Loader';
+import Loader from '../components/Loader'
 import Toast, { DURATION } from 'react-native-easy-toast'
 
 class LoginForm extends Component {
@@ -19,10 +19,12 @@ class LoginForm extends Component {
     title: 'Welcome'
   }
 
-  onLoginPress() {
+  onLoginPress () {
     this.setState({ error: '', loading: true })
     const { email, password } = this.state
-    firebase.auth().signInWithEmailAndPassword(email, password)
+    firebase
+      .auth()
+      .signInWithEmailAndPassword(email, password)
       .then(() => {
         this.setState({ error: '', loading: false })
         this.props.navigation.navigate('App')
@@ -30,17 +32,14 @@ class LoginForm extends Component {
       .catch(() => {
         // Login was not successful, let's create a new account
         this.setState({ error: 'Authentication failed.', loading: false })
-        this.refs.toast.show('Authentication failed.', 2000);
+        this.refs.toast.show('Authentication failed.', 2000)
       })
   }
 
-
-
-  render() {
+  render () {
     return (
       <View style={styles.container}>
-        <Loader
-          loading={this.state.loading} />
+        <Loader loading={this.state.loading} />
         <TextInput
           style={styles.inputBox}
           placeholder='Email'
@@ -64,14 +63,16 @@ class LoginForm extends Component {
         >
           <Text style={styles.buttonText}>{this.props.type}</Text>
         </TouchableOpacity>
-        <Toast ref="toast"
+        <Toast
+          ref='toast'
           style={{ backgroundColor: '#595959' }}
           position='top'
           positionValue={220}
           fadeInDuration={50}
           fadeOutDuration={300}
           opacity={1}
-          textStyle={{ color: 'white' }} />
+          textStyle={{ color: 'white' }}
+        />
       </View>
     )
   }

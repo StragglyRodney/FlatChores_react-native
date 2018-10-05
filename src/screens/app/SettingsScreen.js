@@ -6,7 +6,9 @@ import {
   StyleSheet,
   Button,
   Platform,
-  ScrollView
+  ScrollView,
+  TouchableOpacity,
+  navigationOptions
 } from 'react-native'
 import { createStackNavigator } from 'react-navigation'
 import Icon from 'react-native-vector-icons/MaterialIcons'
@@ -18,13 +20,15 @@ import {
   SettingsSwitch,
   SettingsPicker
 } from 'react-native-settings-components'
+import email from 'react-native-email'
+
 
 // create a component
 class SettingsScreen extends Component {
   static navigationOptions = {
     title: 'Settings'
   }
-  constructor () {
+  constructor() {
     super()
     this.state = {
       username: '',
@@ -33,7 +37,8 @@ class SettingsScreen extends Component {
     }
   }
 
-  render () {
+
+  render() {
     return (
       <ScrollView
         style={{
@@ -110,6 +115,14 @@ class SettingsScreen extends Component {
               : colors.switchDisabled
           }
         />
+
+        <SettingsCategoryHeader
+          title={'Contact Us'}
+          textStyle={Platform.OS === 'android' ? { color: colors.monza } : null}
+        />
+        <TouchableOpacity onPress={() => this.props.navigation.push('Support')}>
+          <Text style={{ marginTop: 10, marginLeft: 15, fontSize: 16 }} >Send us an email </Text>
+        </TouchableOpacity>
 
       </ScrollView>
     )

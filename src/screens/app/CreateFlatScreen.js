@@ -4,7 +4,6 @@ import {View, StyleSheet, ScrollView, Text, TouchableOpacity, TextInputAndroidPr
 import { ListItem, Button } from "react-native-elements";
 import Stepper from "react-native-js-stepper";
 import Icon from "react-native-vector-icons/MaterialIcons";
-import AddFlatMateScreen from "./AddFlatMateScreen";
 
 
 //flatmates here are preloaded with dumby flatmates, the list "flatmates" should include those flatmates who have been added by the 

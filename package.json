@@ -7,8 +7,10 @@
     "test": "jest"
   },
   "dependencies": {
+    "babel-preset-react-native-stage-0": "^1.0.1",
     "firebase": "^5.5.2",
     "giphy-api": "^1.2.7",
+    "libphonenumber-js": "^1.5.1",
     "prop-types": "^15.6.2",
     "react": "16.5.0",
     "react-native": "0.57.0",
@@ -32,6 +34,7 @@
   },
   "devDependencies": {
     "babel-jest": "23.6.0",
+    "babel-polyfill": "^6.26.0",
     "jest": "23.6.0",
     "metro-react-native-babel-preset": "0.45.3",
     "react-test-renderer": "16.5.0"

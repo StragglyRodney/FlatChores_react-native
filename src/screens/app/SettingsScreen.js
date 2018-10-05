@@ -7,7 +7,8 @@ import {
   Button,
   Platform,
   ScrollView,
-  TouchableOpacity
+  TouchableOpacity,
+  navigationOptions
 } from 'react-native'
 import { createStackNavigator } from 'react-navigation'
 import Icon from 'react-native-vector-icons/MaterialIcons'
@@ -34,14 +35,6 @@ class SettingsScreen extends Component {
       allowPushNotifications: false,
       gender: ''
     }
-  }
-
-  contactUs() {
-    const to = ['support@flatchores.com'] // string or array of email addresses
-    email(to, {
-      subject: 'Flatchores user: IDwillgohere',
-      body: 'Some body right here'
-    }).catch(console.error)
   }
 
 
@@ -127,8 +120,8 @@ class SettingsScreen extends Component {
           title={'Contact Us'}
           textStyle={Platform.OS === 'android' ? { color: colors.monza } : null}
         />
-        <TouchableOpacity onPress={this.contactUs.bind(this)}>
-          <Text>Send us an email</Text>
+        <TouchableOpacity onPress={() => this.props.navigation.push('Support')}>
+          <Text style={{ marginTop: 10, marginLeft: 15, fontSize: 16 }} >Send us an email </Text>
         </TouchableOpacity>
 
       </ScrollView>

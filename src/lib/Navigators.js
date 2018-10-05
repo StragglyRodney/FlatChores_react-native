@@ -20,6 +20,7 @@ import JoinFlatScreen from '../screens/app/JoinFlatScreen'
 import ViewProfile from '../screens/app/ViewProfile'
 import AddFlatMateScreen from '../screens/app/AddFlatMateScreen'
 import hideTabBar from './HideTabBar'
+import SupportScreen from '../screens/app/SupportScreen';
 
 const AuthStack = createStackNavigator({
   GetStarted: GetStartedScreen,
@@ -45,7 +46,8 @@ FlatStack.navigationOptions = hideTabBar
 const SettingsStack = createStackNavigator({
   SettingsNav: SettingsScreen,
   Notifications: NotificationsScreen,
-  Profile: ProfileScreen
+  Profile: ProfileScreen,
+  Support: SupportScreen
 })
 SettingsStack.navigationOptions = hideTabBar
 

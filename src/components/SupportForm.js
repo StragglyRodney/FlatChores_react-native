@@ -5,63 +5,68 @@ import {
   View,
   TextInput,
   TouchableOpacity,
-  navigationOptions
 } from 'react-native'
 import { withNavigation } from 'react-navigation'
 import firebase from 'firebase'
-import Loader from '../components/Loader'
+import Loader from './Loader'
 import Toast, { DURATION } from 'react-native-easy-toast'
+import email from 'react-native-email'
 
-class LoginForm extends Component {
-  state = { email: '', password: '', error: '', loading: false }
+
+class SupportForm extends Component {
+
+  state = { email: '', password: '', error: '', loading: false, problem: '', description: '' }
   static navigationOptions = {
     header: { visible: false },
     title: 'Welcome'
   }
 
-  onLoginPress() {
-    this.setState({ error: '', loading: true })
-    const { email, password } = this.state
-    firebase
-      .auth()
-      .signInWithEmailAndPassword(email, password)
-      .then(() => {
-        this.setState({ error: '', loading: false })
-        this.props.navigation.navigate('App')
-      })
-      .catch(() => {
-        // Login was not successful, let's create a new account
-        this.setState({ error: 'Authentication failed.', loading: false })
-        this.refs.toast.show('Authentication failed.', 2000)
-      })
+  contactUs() {
+    const { problem, description } = this.state
+
+    const to = ['support@flatchores.com'] // string or array of email addresses
+    email(to, {
+      subject: problem,
+      body: description
+    }).catch(console.error)
   }
 
   render() {
     return (
       <View style={styles.container}>
         <Loader loading={this.state.loading} />
-        <TextInput
+        <TextInput id="useremail"
           style={styles.inputBox}
-          placeholder='Email'
-          placeholderTextColor='#ffffff'
+          placeholder='Your Email'
+          placeholderTextColor='#000000'
           autoCapitalize='none'
-          value={this.state.email}
-          onChangeText={email => this.setState({ email })}
         />
-        <TextInput
+        <TextInput id="username"
           style={styles.inputBox}
-          placeholder='Password'
-          placeholderTextColor='#ffffff'
+          placeholder='Your Name'
+          placeholderTextColor='#000000'
           secureTextEntry
           autoCapitalize='none'
-          value={this.state.password}
-          onChangeText={password => this.setState({ password })}
+        />
+        <TextInput id="problem"
+          style={styles.inputBox}
+          placeholder='Describe the problem in a few words'
+          placeholderTextColor='#000000'
+          value={this.state.problem}
+          onChangeText={problem => this.setState({ problem })}
+        />
+        <TextInput id="description"
+          style={styles.inputBox}
+          placeholder='Describe the problem in more detail'
+          placeholderTextColor='#000000'
+          onChangeText={description => this.setState({ description })}
+
         />
         <TouchableOpacity
-          onPress={this.onLoginPress.bind(this)}
+          onPress={this.contactUs.bind(this)}
           style={styles.button}
         >
-          <Text style={styles.buttonText}>{this.props.type}</Text>
+          <Text style={styles.buttonText}>Send Email</Text>
         </TouchableOpacity>
         <Toast
           ref='toast'
@@ -87,7 +92,7 @@ const styles = StyleSheet.create({
 
   inputBox: {
     width: 300,
-    backgroundColor: 'rgba(255,255,255,0.2)',
+    backgroundColor: 'rgba(0,0,0,0.2)',
     borderRadius: 10,
     paddingHorizontal: 16,
     paddingVertical: 12,
@@ -98,7 +103,7 @@ const styles = StyleSheet.create({
 
   button: {
     width: 300,
-    backgroundColor: '#ffa18a',
+    backgroundColor: '#26c6da',
     borderRadius: 10,
     paddingVertical: 12,
     marginVertical: 6
@@ -113,4 +118,4 @@ const styles = StyleSheet.create({
   }
 })
 
-export default withNavigation(LoginForm)
+export default withNavigation(SupportForm)

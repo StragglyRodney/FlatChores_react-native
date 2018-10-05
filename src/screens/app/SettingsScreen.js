@@ -6,7 +6,8 @@ import {
   StyleSheet,
   Button,
   Platform,
-  ScrollView
+  ScrollView,
+  TouchableOpacity
 } from 'react-native'
 import { createStackNavigator } from 'react-navigation'
 import Icon from 'react-native-vector-icons/MaterialIcons'
@@ -18,13 +19,15 @@ import {
   SettingsSwitch,
   SettingsPicker
 } from 'react-native-settings-components'
+import email from 'react-native-email'
+
 
 // create a component
 class SettingsScreen extends Component {
   static navigationOptions = {
     title: 'Settings'
   }
-  constructor () {
+  constructor() {
     super()
     this.state = {
       username: '',
@@ -33,7 +36,16 @@ class SettingsScreen extends Component {
     }
   }
 
-  render () {
+  contactUs() {
+    const to = ['support@flatchores.com'] // string or array of email addresses
+    email(to, {
+      subject: 'Flatchores user: IDwillgohere',
+      body: 'Some body right here'
+    }).catch(console.error)
+  }
+
+
+  render() {
     return (
       <ScrollView
         style={{
@@ -110,6 +122,14 @@ class SettingsScreen extends Component {
               : colors.switchDisabled
           }
         />
+
+        <SettingsCategoryHeader
+          title={'Contact Us'}
+          textStyle={Platform.OS === 'android' ? { color: colors.monza } : null}
+        />
+        <TouchableOpacity onPress={this.contactUs.bind(this)}>
+          <Text>Send us an email</Text>
+        </TouchableOpacity>
 
       </ScrollView>
     )

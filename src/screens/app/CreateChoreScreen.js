@@ -1,5 +1,12 @@
 import React, { Component } from 'react'
-import { View, Text, TextInput, StyleSheet, Button } from 'react-native'
+import {
+  View,
+  Text,
+  TextInput,
+  StyleSheet,
+  Button,
+  TouchableOpacity
+} from 'react-native'
 import firebase from 'react-native-firebase'
 
 class CreateChoreScreen extends Component {
@@ -14,13 +21,14 @@ class CreateChoreScreen extends Component {
   }
 
   async createChore (choreTitle, choreDescription) {
-    const doc = await firebase
+    chore = await firebase
       .firestore()
       .collection('flats')
       .doc('flat1')
       .collection('chores')
       .doc(choreTitle)
-      .get()
+
+    const doc = chore.get()
 
     if (doc.exists) {
       return doc.data()
@@ -29,13 +37,7 @@ class CreateChoreScreen extends Component {
         choreTitle: choreTitle,
         choreDescription: choreDescription
       }
-      await firebase
-        .firestore()
-        .collection('flats')
-        .doc('flat1')
-        .collection('chores')
-        .doc(choreTitle)
-        .set(defaultDoc)
+      chore.set(defaultDoc)
 
       return doc
     }
@@ -52,14 +54,15 @@ class CreateChoreScreen extends Component {
           onChangeText={choreTitle => this.setState({ choreTitle })}
         />
         <TextInput
-          style={styles.inputBox}
+          multiline
+          style={styles.descriptionBox}
           placeholder='Chore Description'
           placeholderTextColor='#ffffff'
           value={this.state.choreDescription}
           onChangeText={choreDescription => this.setState({ choreDescription })}
         />
 
-        <Button
+        <TouchableOpacity
           onPress={() => {
             this.createChore(
               this.state.choreTitle,
@@ -69,9 +72,10 @@ class CreateChoreScreen extends Component {
               this.props.navigation.goBack()
             })
           }}
-          title='Create Chore'
-          color='#ffffff'
-        />
+          style={styles.button}
+        >
+          <Text style={styles.buttonText}>{'Create Chore'}</Text>
+        </TouchableOpacity>
       </View>
     )
   }
@@ -80,6 +84,7 @@ class CreateChoreScreen extends Component {
 const styles = StyleSheet.create({
   container: {
     flexGrow: 1,
+    paddingVertical: 20,
     alignItems: 'center',
     backgroundColor: '#00c2cc'
   },
@@ -93,6 +98,19 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: '#ffffff',
     marginVertical: 6
+  },
+
+  descriptionBox: {
+    width: 300,
+    backgroundColor: 'rgba(255,255,255,0.2)',
+    borderRadius: 10,
+    paddingHorizontal: 16,
+    paddingVertical: 12,
+    fontSize: 16,
+    alignItems: 'stretch',
+    color: '#ffffff',
+    marginVertical: 6,
+    flex: 1
   },
 
   button: {

@@ -6,7 +6,8 @@ import {
   StyleSheet,
   Button,
   TouchableOpacity,
-  ScrollView
+  ScrollView,
+  RefreshControl
 } from 'react-native'
 
 import firebase from 'react-native-firebase'
@@ -16,7 +17,10 @@ import ChoresAccordionView from '../../components/ChoresAccordionView'
 class HomeScreen extends Component {
   constructor (props) {
     super(props)
-    this.state = { accordion_chores: [] }
+    this.state = {
+      accordion_chores: [],
+      refreshing: false
+    }
   }
 
   handleOnNavigateBack = () => {
@@ -28,6 +32,7 @@ class HomeScreen extends Component {
   }
 
   refreshChores () {
+    this.setState({ refreshing: true })
     firebase
       .firestore()
       .collection('flats')
@@ -36,9 +41,7 @@ class HomeScreen extends Component {
       .get()
       .then(snapshot => {
         // reset the chores
-        this.setState(() => {
-          return { accordion_chores: [] }
-        })
+        this.setState({ accordion_chores: [] })
 
         // pull all the chores from firestore
         chores = []
@@ -50,15 +53,24 @@ class HomeScreen extends Component {
         })
 
         // set state variable to these chores
+        this.setState({ accordion_chores: chores })
         this.setState(() => {
-          return { accordion_chores: chores }
+          return { refreshing: false }
         })
       })
   }
 
   render () {
     return (
-      <ScrollView style={styles.container}>
+      <ScrollView
+        style={styles.container}
+        refreshControl={
+          <RefreshControl
+            refreshing={this.state.refreshing}
+            onRefresh={() => this.refreshChores()}
+          />
+        }
+      >
         <ChoresAccordionView sections={this.state.accordion_chores} />
         <View style={styles.addChoreCont}>
           <Icon

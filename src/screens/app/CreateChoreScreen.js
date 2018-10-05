@@ -35,7 +35,22 @@ class CreateChoreScreen extends Component {
     } else {
       const defaultDoc = {
         choreTitle: choreTitle,
-        choreDescription: choreDescription
+        choreDescription: choreDescription,
+        confirm: (
+          <View style={styles.addChoreCont}>
+            <Icon
+              raised
+              name='add-circle'
+              size={40}
+              type='font-awesome'
+              color='#ffa18a'
+              onPress={() =>
+                this.props.navigation.navigate('CreateChore', {
+                  onNavigateBack: this.handleOnNavigateBack
+                })}
+            />
+          </View>
+        )
       }
       chore.set(defaultDoc)
 

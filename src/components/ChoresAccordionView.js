@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
-import { View, Text, StyleSheet } from 'react-native'
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 import Collapsible from 'react-native-collapsible'
 import Accordion from 'react-native-collapsible/Accordion'
 import firebase from 'react-native-firebase'
+import { Button } from 'react-native-elements'
 
 class ChoresAccordionView extends Component {
   _renderHeader (section) {

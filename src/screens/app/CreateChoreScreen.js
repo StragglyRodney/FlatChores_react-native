@@ -21,13 +21,14 @@ class CreateChoreScreen extends Component {
   }
 
   async createChore (choreTitle, choreDescription) {
-    const doc = await firebase
+    chore = await firebase
       .firestore()
       .collection('flats')
       .doc('flat1')
       .collection('chores')
       .doc(choreTitle)
-      .get()
+
+    const doc = chore.get()
 
     if (doc.exists) {
       return doc.data()
@@ -36,13 +37,7 @@ class CreateChoreScreen extends Component {
         choreTitle: choreTitle,
         choreDescription: choreDescription
       }
-      await firebase
-        .firestore()
-        .collection('flats')
-        .doc('flat1')
-        .collection('chores')
-        .doc(choreTitle)
-        .set(defaultDoc)
+      chore.set(defaultDoc)
 
       return doc
     }

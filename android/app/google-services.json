@@ -1,0 +1,104 @@
+{
+  "project_info": {
+    "project_number": "415430905460",
+    "firebase_url": "https://flatchores-react-native.firebaseio.com",
+    "project_id": "flatchores-react-native",
+    "storage_bucket": "flatchores-react-native.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:415430905460:android:dd71d440c5c05241",
+        "android_client_info": {
+          "package_name": "com.RAD.FlatChores"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "415430905460-t38mi1k2vrlskgfb81bgbnhg2q08kbdt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCDrthLfL6HVkS4FVy9S6grnwQVUPHkCn4"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:415430905460:android:63a0a254689709ff",
+        "android_client_info": {
+          "package_name": "com.company.FlatChores"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "415430905460-t38mi1k2vrlskgfb81bgbnhg2q08kbdt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCDrthLfL6HVkS4FVy9S6grnwQVUPHkCn4"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:415430905460:android:34ebcead5958acbc",
+        "android_client_info": {
+          "package_name": "com.flatchores"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "415430905460-t38mi1k2vrlskgfb81bgbnhg2q08kbdt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCDrthLfL6HVkS4FVy9S6grnwQVUPHkCn4"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

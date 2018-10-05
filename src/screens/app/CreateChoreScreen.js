@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { View, Text, TextInput, StyleSheet, Button } from 'react-native'
-import firebaseService from '../../lib/FirebaseService'
+import firebase from 'react-native-firebase'
 
 class CreateChoreScreen extends Component {
   constructor (props) {
@@ -8,7 +8,36 @@ class CreateChoreScreen extends Component {
     this.state = {
       choreTitle: '',
       choreDescription: '',
+      choreCompleted: false,
       choreDueDate: new Date() + 7
+    }
+  }
+
+  async createChore (choreTitle, choreDescription) {
+    const doc = await firebase
+      .firestore()
+      .collection('flats')
+      .doc('flat1')
+      .collection('chores')
+      .doc(choreTitle)
+      .get()
+
+    if (doc.exists) {
+      return doc.data()
+    } else {
+      const defaultDoc = {
+        choreTitle: choreTitle,
+        choreDescription: choreDescription
+      }
+      await firebase
+        .firestore()
+        .collection('flats')
+        .doc('flat1')
+        .collection('chores')
+        .doc(choreTitle)
+        .set(defaultDoc)
+
+      return doc
     }
   }
 
@@ -32,12 +61,13 @@ class CreateChoreScreen extends Component {
 
         <Button
           onPress={() => {
-            firebaseService
-              .createChore(this.state.choreTitle, this.state.choreDescription)
-              .then(() => {
-                this.props.navigation.state.params.onNavigateBack()
-                this.props.navigation.goBack()
-              })
+            this.createChore(
+              this.state.choreTitle,
+              this.state.choreDescription
+            ).then(() => {
+              this.props.navigation.state.params.onNavigateBack()
+              this.props.navigation.goBack()
+            })
           }}
           title='Create Chore'
           color='#ffffff'

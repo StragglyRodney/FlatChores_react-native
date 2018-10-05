@@ -8,6 +8,7 @@ import {
   TouchableOpacity
 } from 'react-native'
 import firebase from 'react-native-firebase'
+import Loader from '../../components/Loader'
 
 class CreateChoreScreen extends Component {
   constructor (props) {
@@ -15,12 +16,13 @@ class CreateChoreScreen extends Component {
     this.state = {
       choreTitle: '',
       choreDescription: '',
-      choreCompleted: false,
-      choreDueDate: new Date() + 7
+      choreDueDate: new Date() + 7,
+      loading: false
     }
   }
 
   async createChore (choreTitle, choreDescription) {
+    this.setState({ error: '', loading: true })
     chore = await firebase
       .firestore()
       .collection('flats')
@@ -35,25 +37,9 @@ class CreateChoreScreen extends Component {
     } else {
       const defaultDoc = {
         choreTitle: choreTitle,
-        choreDescription: choreDescription,
-        confirm: (
-          <View style={styles.addChoreCont}>
-            <Icon
-              raised
-              name='add-circle'
-              size={40}
-              type='font-awesome'
-              color='#ffa18a'
-              onPress={() =>
-                this.props.navigation.navigate('CreateChore', {
-                  onNavigateBack: this.handleOnNavigateBack
-                })}
-            />
-          </View>
-        )
+        choreDescription: choreDescription
       }
       chore.set(defaultDoc)
-
       return doc
     }
   }
@@ -61,6 +47,7 @@ class CreateChoreScreen extends Component {
   render () {
     return (
       <View style={styles.container}>
+        <Loader loading={this.state.loading} />
         <TextInput
           style={styles.inputBox}
           placeholder='Chore Title'
@@ -83,6 +70,7 @@ class CreateChoreScreen extends Component {
               this.state.choreTitle,
               this.state.choreDescription
             ).then(() => {
+              this.setState({ error: '', loading: false })
               this.props.navigation.state.params.onNavigateBack()
               this.props.navigation.goBack()
             })

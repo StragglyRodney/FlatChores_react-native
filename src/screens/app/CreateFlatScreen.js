@@ -5,26 +5,15 @@ import { ListItem, Button } from "react-native-elements";
 import Stepper from "react-native-js-stepper";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import AddFlatMateScreen from "./AddFlatMateScreen";
-
+import axios from 'react-native-axios'
 
 //flatmates here are preloaded with dumby flatmates, the list "flatmates" should include those flatmates who have been added by the 
 //user using the addflatmatescreen, this can be done using redux to avoid using callbacks. (redux can be described as a global state... i think)
-const flatmates = [
-  {
-    name: "Amy Farha",
-    avatar_url:
-      "https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg",
-    subject: "Vice President",
-    description:"Hi Im Amy Farha and I like to party hardy"
-  },
-  {
-    name: "Jack Jackson",
-    avatar_url:
-      "https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg",
-    subject: "Vice Chairman",
-    description: "Hi Im Jack Jackosn and I like to party hardy"
-  }
-];
+
+
+
+const flatmates= [];
+var data = require('./data.json');
 
 class CreateFlatScreen extends Component {
   static navigationOptions = {
@@ -35,9 +24,20 @@ class CreateFlatScreen extends Component {
     super(props);
     this.state = {
       //used as a conditional within render to decide which view to return
-      page: 1
+      page: 1,
+      userList: []
+
     };
+    this.loadData()
   }
+
+
+  loadData() {
+    for(let i = 0; i < 5; i++){
+      var flatmate = data[i];
+      flatmates.push({"name":flatmate.name,"avatar_url":flatmate.avatar_url,"subject":flatmate.subject,"description":flatmate.description})
+    }
+   }
 
   render() {
     //can return one of two views depedning on what stage there at in the create flat process

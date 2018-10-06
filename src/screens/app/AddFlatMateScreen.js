@@ -1,70 +1,45 @@
 // import liraries
 import React, { Component } from "react";
-import {View, StyleSheet, ScrollView, Text, TouchableOpacity} from "react-native";
+import {
+  View,
+  StyleSheet,
+  ScrollView,
+  Text,
+  TouchableOpacity
+} from "react-native";
 import { ListItem, Button } from "react-native-elements";
-
 import Icon from "react-native-vector-icons/MaterialIcons";
 import SearchInput, { createFilter } from "react-native-search-filter";
+import { AsyncStorage } from "react-native"
 
-//
-const flatmates = [
-  {
-    name: "Amy Farha",
-    avatar_url:
-      "https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg",
-    subject: "Vice President",
-    description:"insert description here"
-  },
-  {
-    name: "Jack Jackson",
-    avatar_url:
-      "https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg",
-    subject: "Vice Chairman",
-    description:"insert description here"
-  },
-  {
-    name: "Ben Rickman",
-    avatar_url:
-      "https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg",
-    subject: "Vice Chairman",
-    description:"insert description here"
-  },
-  {
-    name: "Angela Roskam",
-    avatar_url:
-      "https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg",
-    subject: "Vice Chairman",
-    description:"insert description here"
-  },
-  {
-    name: "Ben Rickman",
-    avatar_url:
-      "https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg",
-    subject: "Vice Chairman",
-    description:"insert description here"
-  },
-  {
-    name: "Angela Roskam",
-    avatar_url:
-      "https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg",
-    subject: "Vice Chairman",
-    description:"insert description here"
-  }
-];
-
-const KEYS_TO_FILTERS = ["name", "subject"]; //in this case we filter search by name, but this can be done by email if need be 
+const KEYS_TO_FILTERS = ["name", "subject"]; //in this case we filter search by name, but this can be done by email if need be
+var flatmates = [];
+var data = require("./users.json");
 
 class AddFlatMateScreen extends Component {
-  
   static navigationOptions = {
-    title: 'CREATE A FLAT'
-  }
+    title: "CREATE A FLAT"
+  };
 
   constructor(props) {
     super(props);
     this.state = {
-      searchTerm: ""//nothing to search yet
+      searchTerm: "" //nothing to search yet
     };
+    this.loadData();
+  }
+
+  loadData() {
+    //should be rewritten for firebase integration
+    for (let i = 0; i < Object.keys(data).length; i++) {
+      var flatmate = data[i];
+      flatmates.push({
+        name: flatmate.name,
+        avatar_url: flatmate.avatar_url,
+        subject: flatmate.subject,
+        description: flatmate.description
+      });
+    }
   }
 
   searchUpdated(term) {
@@ -72,13 +47,12 @@ class AddFlatMateScreen extends Component {
   }
 
   render() {
-    filteredflatmates=[]//create and empty filtered list
-    
+    filteredflatmates = []; //create and empty filtered list
+
     //if search is empty, dont update filtered list
     if (this.state.searchTerm.length == 0) {
       filteredflatmates = [];
-    }
-    else{
+    } else {
       //update filtered list
       filteredflatmates = flatmates.filter(
         createFilter(this.state.searchTerm, KEYS_TO_FILTERS)
@@ -91,26 +65,26 @@ class AddFlatMateScreen extends Component {
         <SearchInput
           style={styles.container}
           onChangeText={term => {
-            this.searchUpdated(term);//on user input update the search "term"
+            this.searchUpdated(term); //on user input update the search "term"
           }}
           style={styles.searchInput}
           placeholder="Search for your flatmates!!"
         />
         <View style={styles.scrollView}>
           <ScrollView>
-            {filteredflatmates.map(email => {
+            {filteredflatmates.map(user => {
               return (
                 <ListItem
-                  key={email.id}
-                  leftAvatar={{ source: { uri: email.avatar_url } }}
-                  title={email.name}
-                  subtitle={email.subject}
-                  onPress={() =>  this.props.navigation.goBack(null)}
-                  rightIcon={<Icon
-                    raised
-                    name="person-add"
-                    size={30}
-                  />}
+                  key={user.id}
+                  leftAvatar={{ source: { uri: user.avatar_url } }}
+                  title={user.name}
+                  subtitle={user.subject}
+                  onPress={()=> {
+                    AsyncStorage.setItem("flatmate", JSON.stringify(user));
+                    this.props.navigation.goBack(null)
+                  }}
+          
+                  rightIcon={<Icon raised name="person-add" size={30} />}
                 />
               );
             })}
@@ -134,13 +108,13 @@ const styles = StyleSheet.create({
     color: "rgba(0,0,0,0.5)"
   },
   searchInput: {
-    backgroundColor: 'rgba(255,255,255,0.2)',
-    color: '#ffffff',
+    backgroundColor: "rgba(255,255,255,0.2)",
+    color: "#ffffff",
     padding: 10,
     borderColor: "#02c4ce",
     borderWidth: 1,
     borderRadius: 10,
-    margin:20,
+    margin: 20
   },
   scrollView: {
     bottom: 0

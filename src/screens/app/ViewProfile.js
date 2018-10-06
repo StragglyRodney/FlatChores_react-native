@@ -42,7 +42,7 @@ class ViewProfile extends Component {
     )
   }
 removeFlatmate(){
-  //remove flatmate here, through the database? or json file? depending on where the clicked view profile from..
+  //remove flatmate here, using firebase
 }
 
 }

@@ -5,15 +5,30 @@ import { ListItem, Button } from "react-native-elements";
 import Stepper from "react-native-js-stepper";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import AddFlatMateScreen from "./AddFlatMateScreen";
-import axios from 'react-native-axios'
 
-//flatmates here are preloaded with dumby flatmates, the list "flatmates" should include those flatmates who have been added by the 
+//flatmates here are preloaded with dumby flatmates, the list "flatmates" should include those flatmates who have been added by the
 //user using the addflatmatescreen, this can be done using redux to avoid using callbacks. (redux can be described as a global state... i think)
 
+var data = require("./flatmates.json");
 
+var flatmates = [{
+  "name": "Amy Farha",
+  "avatar_url":
+    "https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg",
+  "subject": "Vice President",
+  "description":"insert description here",
+  "inFlat":false
+},
+{
+  "name": "Jack Jackson",
+  "avatar_url":
+    "https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg",
+  "subject": "Vice Chairman",
+  "description":"insert description here",
+  "inFlat":false
+}];
 
-const flatmates= [];
-var data = require('./data.json');
+var flatName = "YOUR FLAT";
 
 class CreateFlatScreen extends Component {
   static navigationOptions = {
@@ -23,32 +38,23 @@ class CreateFlatScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      //used as a conditional within render to decide which view to return
-      page: 1,
-      userList: []
-
+      page: 1 //used as a conditional within render to decide which view to return
     };
-    this.loadData()
+    this.loadData();
   }
 
-
   loadData() {
-    for(let i = 0; i < 5; i++){
-      var flatmate = data[i];
-      flatmates.push({"name":flatmate.name,"avatar_url":flatmate.avatar_url,"subject":flatmate.subject,"description":flatmate.description})
-    }
-   }
+    //should be rewritten for firebase integration
+  }
 
   render() {
-    //can return one of two views depedning on what stage there at in the create flat process
-    //to be implemented ---> more conditionals to ensure the user has entered a valid flat name!! important!
+    //can return one of two views depending on what stage there at in the create flat process
     if (this.state.page == 1) {
       return this.getViewOne();
     } else {
       return this.getViewTwo();
     }
   }
-
 
   //FIRST STEP (ADDING FLATMATES)
   getViewOne() {
@@ -79,7 +85,9 @@ class CreateFlatScreen extends Component {
               rightIcon={<Icon raised name="arrow-forward" size={30} />}
               title={flatmate.name}
               subtitle={flatmate.subtitle}
-              onPress={() => this.props.navigation.navigate("ViewProfile", {flatmate})}
+              onPress={() =>
+                this.props.navigation.navigate("ViewProfile", { flatmate })
+              }
             />
           ))}
         </ScrollView>
@@ -113,24 +121,20 @@ class CreateFlatScreen extends Component {
     );
   }
 
-
-  //VIEW FOR STEP NUMBER TWO (CREATE A FLAT NAME)
+  //Second step for creating a flat name
   getViewTwo() {
     return (
       <View style={styles.container}>
-
         <View style={styles.title}>
           <Text style={styles.titleText1}>Create a Flat name</Text>
         </View>
 
         <View style={styles.flatName}>
-
           <TextInput
             style={styles.inputBox}
             placeholder="Flat nickname"
             placeholderTextColor="#ffffff"
           />
-
         </View>
 
         <View style={styles.stepper}>
@@ -143,7 +147,7 @@ class CreateFlatScreen extends Component {
             showBottomStepper={true}
             backButtonTitle="BACK"
             onPressNext={() => {
-              this.createFlat
+              this.createFlat;
             }}
             onPressBack={() => this.setState({ page: 1 })}
             nextButtonTitle="FINISH"
@@ -165,7 +169,7 @@ class CreateFlatScreen extends Component {
   createFlat() {
     //CREATE A FLAT AND QUERY THE DATABASE
     //NAVIGATE TO CHORES PAGE
-    this.props.navigation.navigate('HomeNav')
+    this.props.navigation.navigate("HomeNav");
   }
 }
 

@@ -16,7 +16,7 @@ class ViewProfile extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      //passed in as a parameter is a flatmate conisting of "avatar_url, name, suject, and description"
+      //passed in as a parameter is a flatmate conisting of "avatar_url, name, suject, and description, inFlat (boolean)"
       flatmate:this.props.navigation.state.params.flatmate
     };
   }
@@ -42,7 +42,7 @@ class ViewProfile extends Component {
     )
   }
 removeFlatmate(){
-  //remove flatmate here, through the database? or json file? depending on where the clicked view profile from..
+  //remove flatmate here, using firebase
 }
 
 }

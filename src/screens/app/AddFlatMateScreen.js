@@ -1,49 +1,45 @@
-// import liraries
 import React, { Component } from "react";
-import {
-  View,
-  StyleSheet,
-  ScrollView,
-  Text,
-  TouchableOpacity
-} from "react-native";
-import { ListItem, Button } from "react-native-elements";
+import {View, StyleSheet, ScrollView} from "react-native";
+import {ListItem} from "react-native-elements";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import SearchInput, { createFilter } from "react-native-search-filter";
 import { AsyncStorage } from "react-native"
 
 const KEYS_TO_FILTERS = ["name", "subject"]; //in this case we filter search by name, but this can be done by email if need be
 var flatmates = [];
-var data = require("./users.json");
+var data = require("./users.json");//import dummy database
 
 class AddFlatMateScreen extends Component {
+
   static navigationOptions = {
     title: "CREATE A FLAT"
   };
 
   constructor(props) {
     super(props);
-    this.state = {
-      searchTerm: "" //nothing to search yet
-    };
+    this.state = { searchTerm: "" }; //nothing to search yet
     this.loadData();
   }
 
+
+  /* load dummy database into the variable flatmates list */
   loadData() {
-    //should be rewritten for firebase integration
     for (let i = 0; i < Object.keys(data).length; i++) {
       var flatmate = data[i];
       flatmates.push({
         name: flatmate.name,
         avatar_url: flatmate.avatar_url,
         subject: flatmate.subject,
-        description: flatmate.description
+        description: flatmate.description,
+        inFlat:flatmate.inFlat
       });
     }
   }
 
+
+  /* Called upon on user input */
   searchUpdated(term) {
-    this.setState({ searchTerm: term });
+    this.setState({ searchTerm: term }); 
   }
 
   render() {
@@ -76,15 +72,13 @@ class AddFlatMateScreen extends Component {
               return (
                 <ListItem
                   key={user.id}
-                  leftAvatar={{ source: { uri: user.avatar_url } }}
                   title={user.name}
                   subtitle={user.subject}
                   onPress={()=> {
-                    AsyncStorage.setItem("flatmate", JSON.stringify(user));
+                    AsyncStorage.setItem("flatmate", JSON.stringify(user)); //using AsyncStorage
                     this.props.navigation.goBack(null)
                   }}
-          
-                  rightIcon={<Icon raised name="person-add" size={30} />}
+                  rightIcon={<Icon style={styles.iconStyle}raised name="person-add" size={30} />}
                 />
               );
             })}
@@ -98,27 +92,24 @@ class AddFlatMateScreen extends Component {
 // define your styles
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "#00c2cc"
-  },
-  emailItem: {
-    borderBottomWidth: 0.5,
-    borderColor: "rgba(0,0,0,0.3)"
-  },
-  flatmatesubject: {
-    color: "rgba(0,0,0,0.5)"
+    backgroundColor: "#ffffff",
+    color:"#00c2cc",
+    
   },
   searchInput: {
-    backgroundColor: "rgba(255,255,255,0.2)",
-    color: "#ffffff",
     padding: 10,
-    borderColor: "#02c4ce",
+    borderColor: "#ffa18a",
     borderWidth: 1,
     borderRadius: 10,
     margin: 20
   },
   scrollView: {
     bottom: 0
+  },
+  iconStyle: {
+    color: "#00c2cc"
   }
+
 });
 
 // make this component available to the app

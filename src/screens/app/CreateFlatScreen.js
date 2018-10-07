@@ -1,15 +1,13 @@
 // import liraries
 import React, { Component } from "react";
 import {View, StyleSheet, ScrollView, Text, TouchableOpacity, TextInputAndroidProperties, navigationOptions, TextInput} from "react-native";
-import { ListItem, Button } from "react-native-elements";
+import { ListItem} from "react-native-elements";
 import Stepper from "react-native-js-stepper";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import AddFlatMateScreen from "./AddFlatMateScreen";
 
 //flatmates here are preloaded with dumby flatmates, the list "flatmates" should include those flatmates who have been added by the
 //user using the addflatmatescreen, this can be done using redux to avoid using callbacks. (redux can be described as a global state... i think)
-
-var data = require("./flatmates.json");
 
 var flatmates = [{
   "name": "Amy Farha",
@@ -44,7 +42,7 @@ class CreateFlatScreen extends Component {
   }
 
   loadData() {
-    //should be rewritten for firebase integration
+    //should be rewritten for firebase integration (load currently added flatmates)
   }
 
   render() {
@@ -65,12 +63,7 @@ class CreateFlatScreen extends Component {
         </View>
 
         <View style={styles.iconView}>
-          <Icon
-            raised
-            name="add-circle"
-            size={50}
-            type="font-awesome"
-            color="#ffa18a"
+          <Icon raised name="add-circle" size={50} type="font-awesome" color="#ffa18a"
             onPress={() => this.props.navigation.navigate("AddFlatMate")}
           />
         </View>
@@ -95,23 +88,14 @@ class CreateFlatScreen extends Component {
         <View style={styles.stepper}>
           <Stepper
             validation={false}
+            textButtonsStyle={styles.stepperTextStyle}
             activeDotStyle={styles.activeDot}
             inactiveDotStyle={styles.inactiveDot}
             showTopStepper={false}
             showBottomStepper={true}
             backButtonTitle="BACK"
-            onPressNext={() => {
-              this.setState({
-                page: 2
-              });
-            }}
+            onPressNext={() => {this.setState({page: 2});}}
             nextButtonTitle="NEXT"
-            activeStepStyle={styles.activeStep}
-            inactiveStepStyle={styles.inactiveStep}
-            activeStepTitleStyle={styles.activeStepTitle}
-            inactiveStepTitleStyle={styles.inactiveStepTitle}
-            activeStepNumberStyle={styles.activeStepNumber}
-            inactiveStepNumberStyle={styles.inactiveStepNumber}
           >
             <View />
             <View />
@@ -129,13 +113,11 @@ class CreateFlatScreen extends Component {
           <Text style={styles.titleText1}>Create a Flat name</Text>
         </View>
 
-        <View style={styles.flatName}>
           <TextInput
             style={styles.inputBox}
             placeholder="Flat nickname"
             placeholderTextColor="#ffffff"
           />
-        </View>
 
         <View style={styles.stepper}>
           <Stepper
@@ -145,18 +127,12 @@ class CreateFlatScreen extends Component {
             inactiveDotStyle={styles.inactiveDot}
             showTopStepper={false}
             showBottomStepper={true}
+            textButtonsStyle={styles.stepperTextStyle}
             backButtonTitle="BACK"
-            onPressNext={() => {
-              this.createFlat;
-            }}
+            onPressNext={() =>
+              this.props.navigation.goBack(null)}
             onPressBack={() => this.setState({ page: 1 })}
             nextButtonTitle="FINISH"
-            activeStepStyle={styles.activeStep}
-            inactiveStepStyle={styles.inactiveStep}
-            activeStepTitleStyle={styles.activeStepTitle}
-            inactiveStepTitleStyle={styles.inactiveStepTitle}
-            activeStepNumberStyle={styles.activeStepNumber}
-            inactiveStepNumberStyle={styles.inactiveStepNumber}
           >
             <View />
             <View />
@@ -169,7 +145,6 @@ class CreateFlatScreen extends Component {
   createFlat() {
     //CREATE A FLAT AND QUERY THE DATABASE
     //NAVIGATE TO CHORES PAGE
-    this.props.navigation.navigate("HomeNav");
   }
 }
 
@@ -210,66 +185,35 @@ const styles = StyleSheet.create({
   iconView: {
     position: "absolute",
     top: 65,
-    left: 25
-  },
-  scrollView: {
-    bottom: 0,
-    height: 450
+    left: 25,
+    borderRadius: 60,
+    backgroundColor:"#ffd0c4"
   },
   stepper: {
     flex: 1,
     bottom: 0,
     padding: 0,
-    backgroundColor: "#ffffff"
+    backgroundColor: "#ffffff",
+    color:"#00c2cc"
   },
   break: {
     height: 30
   },
+  stepperTextStyle:{
+    color:"#00c2cc"
+  },
   activeDot: {
-    backgroundColor: "grey"
+    backgroundColor: "#00c2cc"
   },
   inactiveDot: {
-    backgroundColor: "#ededed"
-  },
-  activeStep: {
-    backgroundColor: "grey"
-  },
-  inactiveStep: {
-    backgroundColor: "#ededed"
-  },
-  activeStepTitle: {
-    fontWeight: "bold"
-  },
-  inactiveStepTitle: {
-    fontWeight: "normal"
-  },
-  activeStepNumber: {
-    color: "white"
-  },
-  inactiveStepNumber: {
-    color: "black"
+    backgroundColor: "#ffa18a"
   },
   inputBox: {
-    textAlign: "center",
-    width: 300,
-    backgroundColor: "grey",
-    borderRadius: 10,
-    paddingHorizontal: 16,
-    paddingVertical: 12,
-    fontSize: 16,
-    color: "#ffffff",
-    marginVertical: 6
-  },
-
-  button: {
-    width: 300,
-    backgroundColor: "#ffa18a",
-    borderRadius: 10,
-    paddingVertical: 12,
-    marginVertical: 6
-  },
-  flatName: {
-    alignItems: "center"
+    margin: 15,
+    borderRadius:10,
+    height: 50,
+    borderColor: '#ffa18a',
+    borderWidth: 1
   }
 });
 

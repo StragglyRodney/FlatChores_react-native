@@ -1,30 +1,32 @@
 // import liraries
 import React, { Component } from "react";
 import {View, StyleSheet, ScrollView, Text, TouchableOpacity, TextInputAndroidProperties, navigationOptions, TextInput} from "react-native";
-import { ListItem, Button } from "react-native-elements";
+import { ListItem} from "react-native-elements";
 import Stepper from "react-native-js-stepper";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import AddFlatMateScreen from "./AddFlatMateScreen";
 
-
-//flatmates here are preloaded with dumby flatmates, the list "flatmates" should include those flatmates who have been added by the 
+//flatmates here are preloaded with dumby flatmates, the list "flatmates" should include those flatmates who have been added by the
 //user using the addflatmatescreen, this can be done using redux to avoid using callbacks. (redux can be described as a global state... i think)
-const flatmates = [
-  {
-    name: "Amy Farha",
-    avatar_url:
-      "https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg",
-    subject: "Vice President",
-    description:"Hi Im Amy Farha and I like to party hardy"
-  },
-  {
-    name: "Jack Jackson",
-    avatar_url:
-      "https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg",
-    subject: "Vice Chairman",
-    description: "Hi Im Jack Jackosn and I like to party hardy"
-  }
-];
+
+var flatmates = [{
+  "name": "Amy Farha",
+  "avatar_url":
+    "https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg",
+  "subject": "Vice President",
+  "description":"insert description here",
+  "inFlat":false
+},
+{
+  "name": "Jack Jackson",
+  "avatar_url":
+    "https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg",
+  "subject": "Vice Chairman",
+  "description":"insert description here",
+  "inFlat":false
+}];
+
+var flatName = "YOUR FLAT";
 
 class CreateFlatScreen extends Component {
   static navigationOptions = {
@@ -34,21 +36,23 @@ class CreateFlatScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      //used as a conditional within render to decide which view to return
-      page: 1
+      page: 1 //used as a conditional within render to decide which view to return
     };
+    this.loadData();
+  }
+
+  loadData() {
+    //should be rewritten for firebase integration (load currently added flatmates)
   }
 
   render() {
-    //can return one of two views depedning on what stage there at in the create flat process
-    //to be implemented ---> more conditionals to ensure the user has entered a valid flat name!! important!
+    //can return one of two views depending on what stage there at in the create flat process
     if (this.state.page == 1) {
       return this.getViewOne();
     } else {
       return this.getViewTwo();
     }
   }
-
 
   //FIRST STEP (ADDING FLATMATES)
   getViewOne() {
@@ -59,12 +63,7 @@ class CreateFlatScreen extends Component {
         </View>
 
         <View style={styles.iconView}>
-          <Icon
-            raised
-            name="add-circle"
-            size={50}
-            type="font-awesome"
-            color="#ffa18a"
+          <Icon raised name="add-circle" size={50} type="font-awesome" color="#ffa18a"
             onPress={() => this.props.navigation.navigate("AddFlatMate")}
           />
         </View>
@@ -79,7 +78,9 @@ class CreateFlatScreen extends Component {
               rightIcon={<Icon raised name="arrow-forward" size={30} />}
               title={flatmate.name}
               subtitle={flatmate.subtitle}
-              onPress={() => this.props.navigation.navigate("ViewProfile", {flatmate})}
+              onPress={() =>
+                this.props.navigation.navigate("ViewProfile", { flatmate })
+              }
             />
           ))}
         </ScrollView>
@@ -87,23 +88,14 @@ class CreateFlatScreen extends Component {
         <View style={styles.stepper}>
           <Stepper
             validation={false}
+            textButtonsStyle={styles.stepperTextStyle}
             activeDotStyle={styles.activeDot}
             inactiveDotStyle={styles.inactiveDot}
             showTopStepper={false}
             showBottomStepper={true}
             backButtonTitle="BACK"
-            onPressNext={() => {
-              this.setState({
-                page: 2
-              });
-            }}
+            onPressNext={() => {this.setState({page: 2});}}
             nextButtonTitle="NEXT"
-            activeStepStyle={styles.activeStep}
-            inactiveStepStyle={styles.inactiveStep}
-            activeStepTitleStyle={styles.activeStepTitle}
-            inactiveStepTitleStyle={styles.inactiveStepTitle}
-            activeStepNumberStyle={styles.activeStepNumber}
-            inactiveStepNumberStyle={styles.inactiveStepNumber}
           >
             <View />
             <View />
@@ -113,25 +105,19 @@ class CreateFlatScreen extends Component {
     );
   }
 
-
-  //VIEW FOR STEP NUMBER TWO (CREATE A FLAT NAME)
+  //Second step for creating a flat name
   getViewTwo() {
     return (
       <View style={styles.container}>
-
         <View style={styles.title}>
           <Text style={styles.titleText1}>Create a Flat name</Text>
         </View>
-
-        <View style={styles.flatName}>
 
           <TextInput
             style={styles.inputBox}
             placeholder="Flat nickname"
             placeholderTextColor="#ffffff"
           />
-
-        </View>
 
         <View style={styles.stepper}>
           <Stepper
@@ -141,18 +127,12 @@ class CreateFlatScreen extends Component {
             inactiveDotStyle={styles.inactiveDot}
             showTopStepper={false}
             showBottomStepper={true}
+            textButtonsStyle={styles.stepperTextStyle}
             backButtonTitle="BACK"
-            onPressNext={() => {
-              this.createFlat
-            }}
+            onPressNext={() =>
+              this.props.navigation.goBack(null)}
             onPressBack={() => this.setState({ page: 1 })}
             nextButtonTitle="FINISH"
-            activeStepStyle={styles.activeStep}
-            inactiveStepStyle={styles.inactiveStep}
-            activeStepTitleStyle={styles.activeStepTitle}
-            inactiveStepTitleStyle={styles.inactiveStepTitle}
-            activeStepNumberStyle={styles.activeStepNumber}
-            inactiveStepNumberStyle={styles.inactiveStepNumber}
           >
             <View />
             <View />
@@ -165,7 +145,6 @@ class CreateFlatScreen extends Component {
   createFlat() {
     //CREATE A FLAT AND QUERY THE DATABASE
     //NAVIGATE TO CHORES PAGE
-    this.props.navigation.navigate('HomeNav')
   }
 }
 
@@ -206,66 +185,35 @@ const styles = StyleSheet.create({
   iconView: {
     position: "absolute",
     top: 65,
-    left: 25
-  },
-  scrollView: {
-    bottom: 0,
-    height: 450
+    left: 25,
+    borderRadius: 60,
+    backgroundColor:"#ffd0c4"
   },
   stepper: {
     flex: 1,
     bottom: 0,
     padding: 0,
-    backgroundColor: "#ffffff"
+    backgroundColor: "#ffffff",
+    color:"#00c2cc"
   },
   break: {
     height: 30
   },
+  stepperTextStyle:{
+    color:"#00c2cc"
+  },
   activeDot: {
-    backgroundColor: "grey"
+    backgroundColor: "#00c2cc"
   },
   inactiveDot: {
-    backgroundColor: "#ededed"
-  },
-  activeStep: {
-    backgroundColor: "grey"
-  },
-  inactiveStep: {
-    backgroundColor: "#ededed"
-  },
-  activeStepTitle: {
-    fontWeight: "bold"
-  },
-  inactiveStepTitle: {
-    fontWeight: "normal"
-  },
-  activeStepNumber: {
-    color: "white"
-  },
-  inactiveStepNumber: {
-    color: "black"
+    backgroundColor: "#ffa18a"
   },
   inputBox: {
-    textAlign: "center",
-    width: 300,
-    backgroundColor: "grey",
-    borderRadius: 10,
-    paddingHorizontal: 16,
-    paddingVertical: 12,
-    fontSize: 16,
-    color: "#ffffff",
-    marginVertical: 6
-  },
-
-  button: {
-    width: 300,
-    backgroundColor: "#ffa18a",
-    borderRadius: 10,
-    paddingVertical: 12,
-    marginVertical: 6
-  },
-  flatName: {
-    alignItems: "center"
+    margin: 15,
+    borderRadius:10,
+    height: 50,
+    borderColor: '#ffa18a',
+    borderWidth: 1
   }
 });
 
